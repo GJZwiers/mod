@@ -27,29 +27,29 @@ await new Command()
   )
   .option(
     "-m, --map [map:boolean]",
-    "Add an import map as part of the project",
+    "Add an import map as part of the project.",
     {
       default: false,
     },
   )
   .option(
     "--no-git [git:boolean]",
-    "Do not initialize a local Git repository for the project",
+    "Do not initialize a local Git repository for the project.",
   )
   .option(
     "-n, --name [name:string]",
-    "Create the project in a new directory with the entered name",
+    "Create the project in a new directory with the entered name.",
   )
   .option(
     "-t, --tdd [tdd:boolean]",
-    "Create the project with a file for tests",
+    "Create the project with a file for tests.",
     {
       default: false,
     },
   )
   .option(
     "-p, --prompt [prompt:boolean]",
-    "Answer a series of prompts in order to set up the module",
+    "Answer a series of prompts in order to set up the module.",
     {
       default: false,
     },
