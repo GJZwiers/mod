@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/GJZwiers/mod/badge.svg?branch=main)](https://coveralls.io/github/GJZwiers/mod?branch=main)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/mod)
 
-`mod` is a simple command line tool to quickly create a new Deno modules. It
+`mod` is a simple command line tool to quickly create a new Deno module. It
 requires `deno` and optionally `git`.
 
 Try it without installing anything:
