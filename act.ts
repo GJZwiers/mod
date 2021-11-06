@@ -48,7 +48,7 @@ export async function act(settings: Settings) {
       defaultModuleContent,
     );
 
-    if (settings.testdriven === true) {
+    if (settings.tdd === true) {
       const testFileName = settings.entrypoint.replace(
         /^(.*)\.ts$/,
         function (_fullmatch: string, p1: string): string {

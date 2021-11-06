@@ -15,7 +15,7 @@ export interface FlagSettings {
   force: boolean;
   git: boolean;
   map: boolean;
-  testdriven: boolean;
+  tdd: boolean;
 }
 
 export interface InsertableTestSpies {
@@ -85,7 +85,7 @@ target/`,
 }
 `,
   ),
-  testdriven: false,
+  tdd: false,
   initGit: initGit,
   addProjectFile: addProjectFile,
 };
