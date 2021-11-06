@@ -112,7 +112,7 @@ Deno.test("act()", async (test) => {
     async () => {
       await beforeEach();
 
-      defaults.testdriven = true;
+      defaults.tdd = true;
 
       await act(defaults);
 
