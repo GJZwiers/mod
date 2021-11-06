@@ -40,8 +40,6 @@ export function ask(options: any) {
   }
 
   if (hasFileExtension(entrypoint, extension) === false) {
-    console.log("Ha!");
-
     entrypoint = `${entrypoint}.${extension}`;
   }
 
