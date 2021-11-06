@@ -1,4 +1,3 @@
-import { defaults } from "./settings.ts";
 import { hasFileExtension } from "./utils.ts";
 
 // deno-lint-ignore no-explicit-any
@@ -6,20 +5,21 @@ export function ask(options: any) {
   const ts = prompt("Use TypeScript?", "y");
 
   const extension = (ts === "y" || ts === "Y") ? "ts" : "js";
+  console.log(extension);
 
   let entrypoint = prompt(
     `Set entrypoint:`,
-    `mod.${defaults.extension}`,
+    `mod.${extension}`,
   ) ?? "mod";
 
   let depsEntrypoint = prompt(
     "Set dependency entrypoint:",
-    `deps.${defaults.extension}`,
+    `deps.${extension}`,
   ) ?? "deps";
 
   let devDepsEntrypoint = prompt(
     "Set dev dependency entrypoint:",
-    `dev_deps.${defaults.extension}`,
+    `dev_deps.${extension}`,
   ) ?? "dev_deps";
 
   let map = false;
@@ -41,6 +41,8 @@ export function ask(options: any) {
   }
 
   if (hasFileExtension(entrypoint, extension) === false) {
+    console.log("Ha!");
+
     entrypoint = `${entrypoint}.${extension}`;
   }
 
