@@ -5,7 +5,7 @@ import { ask } from "./ask.ts";
 
 await new Command()
   .name("mod")
-  .version("v0.1.0")
+  .version("v1.0.1")
   .description("Start a new Deno project with a single command")
   .option(
     "-c, --config [config:boolean]",
