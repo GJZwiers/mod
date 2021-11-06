@@ -85,7 +85,8 @@ not all of the files above are present yet.
 
 `--help` will print helpful information to the terminal.
 
-`--prompt` or `-p` will ask for input with a few questions in order to construct the module:
+`--prompt` or `-p` will ask for input with a few questions in order to construct
+the module:
 
 `mod --prompt`
 
