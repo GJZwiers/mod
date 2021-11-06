@@ -9,14 +9,14 @@ await new Command()
   .description("Start a new Deno project with a single command")
   .option(
     "-c, --config [config:boolean]",
-    "Add a Deno.json configuration file as part of the project.",
+    "Add a deno.json configuration file as part of the project.",
     {
       default: false,
     },
   )
   .option(
     "-o, --config-only [configOnly:boolean]",
-    "Make only a Deno.json configuration file.",
+    "Only make a deno.json configuration file.",
     {
       default: false,
     },
