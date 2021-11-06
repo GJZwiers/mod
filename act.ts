@@ -58,7 +58,7 @@ export async function act(settings: Settings) {
       await settings.addProjectFile(
         settings.name + "/" + settings.devDepsEntrypoint,
         new TextEncoder().encode(
-          'export { assert } from "https://deno.land/std@0.112.0/testing/asserts.ts"\n',
+          'export { assert } from "https://deno.land/std@0.113.0/testing/asserts.ts"\n',
         ),
       );
     } else {
