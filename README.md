@@ -77,7 +77,7 @@ This will create the following file and directory structure:
 
 ```
 .
-├── my_project
+├── my_deno_project
 |   ├── .gitignore
 |   ├── deps.ts
 |   ├── dev_deps.ts
