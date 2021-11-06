@@ -4,13 +4,13 @@
 [![Coverage Status](https://coveralls.io/repos/github/GJZwiers/mod/badge.svg?branch=main)](https://coveralls.io/github/GJZwiers/mod?branch=main)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/mod)
 
-`mod` is a simple command line tool to quickly create a new Deno module. It
+`mod` is a command line tool to quickly scaffold a new Deno project. It
 requires `deno` and optionally `git`.
 
 Try it without installing anything:
 
 ```
-deno run --allow-read --allow-run=git --allow-write https://deno.land/x/mod@v1.0.1/mod.ts -n awesome_deno_project
+deno run --allow-read --allow-run=git --allow-write https://deno.land/x/mod@v1.0.3/mod.ts -n awesome_deno_project
 ```
 
 ## Table of Contents
@@ -26,7 +26,7 @@ deno run --allow-read --allow-run=git --allow-write https://deno.land/x/mod@v1.0
 Install the latest stable release from `deno.land` (or `nest.land`):
 
 ```
-deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v1.0.1/mod.ts
+deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v1.0.3/mod.ts
 ```
 
 Or install the latest unstable (unreleased) version from `GitHub`:
@@ -87,7 +87,7 @@ This will create the following file and directory structure:
 ## Options
 
 To see what options and flags are available use `mod --help` if you have the CLI
-installed or `deno run https://deno.land/x/mod@v1.0.1/mod.ts --help`
+installed or `deno run https://deno.land/x/mod@v1.0.3/mod.ts --help`
 
 ## Contributing
 
