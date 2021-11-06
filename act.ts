@@ -62,7 +62,7 @@ export async function act(settings: Settings) {
         ),
       );
     } else {
-      await settings.addProjectFile(  
+      await settings.addProjectFile(
         settings.name + "/" + settings.devDepsEntrypoint,
         defaultModuleContent,
       );
