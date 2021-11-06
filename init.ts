@@ -3,9 +3,6 @@ import { act } from "./act.ts";
 import { defaults } from "./settings.ts";
 import { ask } from "./ask.ts";
 
-/**
- * Main CLI command, as of right now the CLI does not have sub-commands.
- */
 await new Command()
   .name("mod")
   .version("v0.1.0")
@@ -51,8 +48,8 @@ await new Command()
     },
   )
   .option(
-    "-y, --yes [yes:boolean]",
-    "Use all default answers, skipping the prompts",
+    "-p, --prompt [prompt:boolean]",
+    "Answer a series of prompts in order to set up the module",
     {
       default: false,
     },
@@ -65,11 +62,11 @@ await new Command()
     },
   )
   .action((options) => {
-    if (options.yes === true) {
-      act({ ...defaults, ...options });
-    } else {
+    if (options.prompt) {
       const choices = ask(options);
       act({ ...defaults, ...choices });
+    } else {
+      act({ ...defaults, ...options });
     }
   })
   .parse(Deno.args);

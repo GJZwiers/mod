@@ -1,8 +1,8 @@
 {
-  "name": "init",
+  "name": "mod",
   "entry": "./mod.ts",
-  "description": "Simple command line tool to initialize Deno projects from prompts.",
-  "unstable": false,
+  "description": "Start a new Deno module",
+  "unstable": true,
   "version": "v0.1.0",
   "files": [
     "./**/*.ts",

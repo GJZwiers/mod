@@ -8,7 +8,7 @@
 
 ## Quickstart
 
-```
+```shell
 deno install --allow-read --allow-run=git --allow-write --name mod https://deno.land/x/mod@v0.1.0/mod.ts
 
 mod -y --name awesome_deno_project
@@ -16,9 +16,7 @@ mod -y --name awesome_deno_project
 
 ## Quickerstart (no install)
 
-```
-deno run --allow-read --allow-run=git --allow-write https://raw.githubusercontent.com/GJZwiers/mod/v0.1.0/mod.ts -y -n awesome_deno_project
-```
+`deno run --allow-read --allow-run=git --allow-write https://deno.land/x/mod@v0.1.0/mod.ts -y -n awesome_deno_project`
 
 ## Table of Contents
 
@@ -35,16 +33,12 @@ recommended though not required.
 
 Next, run `deno install` to install the CLI:
 
-```
-deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/init@v0.1.0/mod.ts
-```
+`deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v0.1.0/mod.ts`
 
 You can install `mod` from a GitHub raw URL with a tag as well, or without one
 to get the latest and greatest (though also unreleased) version:
 
-```
-deno install --allow-read --allow-run=git --allow-write -n mod https://raw.githubusercontent.com/GJZwiers/mod/main/mod.ts
-```
+`deno install --allow-read --allow-run=git --allow-write -n mod https://raw.githubusercontent.com/GJZwiers/mod/main/mod.ts`
 
 To upgrade, run the command with a new version number and include `-f`.
 
@@ -58,9 +52,7 @@ The program needs the following permissions to run:
 
 ## Basic Usage
 
-```
-mod
-```
+`mod`
 
 This will prompt you for the following:
 
@@ -73,7 +65,7 @@ This will prompt you for the following:
 Choosing all defaults will create the following structure in the current
 directory:
 
-```
+```shell
 .
 ├── .gitignore
 ├── deps.ts
@@ -93,21 +85,16 @@ not all of the files above are present yet.
 
 `--help` will print helpful information to the terminal.
 
-`--yes` or `-y` will initialize the project in the current working directory
-with all the defaults, skipping the prompts:
+`--prompt` or `-p` will ask for input with a few questions in order to construct the module:
 
-```
-mod --yes
-```
+`mod --prompt`
 
 `--name` or `-n` will initialize the project in a new directory in the current
 working directory:
 
-```
-mod --name my_project
-```
+`mod --name my_project`
 
-```
+```shell
 .
 ├── my_project
 |   ├── .gitignore
@@ -121,49 +108,35 @@ any missing directories along the way.
 
 `--map` or `-m` will add an (empty) `import_map.json` file to the project:
 
-```
-mod --map
-```
+`mod --map`
 
 `--config` or `-c` will add an (empty) `deno.json` file to the project:
 
-```
-mod --config
-```
+`mod --config`
 
 `--config-only` or `-o` will add _only_ a `deno.json` file to the project. Note
 that this also disables running `git init`:
 
-```
-mod --config-only
-```
+`mod --config-only`
 
 `--tdd` or `-t` will include a `.test` file to get started with a test-driven
 project, such as `mod.test.ts`:
 
-```
-mod --tdd
-```
+`mod --tdd`
 
 `--force` or `-f` will allow the program to overwrite existing files. This can
 be helpful to re-initialize but use with caution.
 
-```
-mod --force
-```
+`mod --force`
 
 `--no-git` will disable running `git init` as part of the project
 initialization.
 
-```
-mod --no-git
-```
+`mod --no-git`
 
 `--ascii` will draw an ASCII Deno to the screen!
 
-```
-mod --ascii
-```
+`mod --ascii`
 
 ## Contributing
 
