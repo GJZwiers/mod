@@ -86,7 +86,8 @@ This will create the following file and directory structure:
 
 ## Options
 
-To see what options and flags are available use `mod --help`
+To see what options and flags are available use `mod --help` if you have the CLI
+installed or `deno run https://deno.land/x/mod@v0.1.0/mod.ts --help`
 
 ## Contributing
 
