@@ -62,8 +62,7 @@ The program needs the following permissions to run:
 mod
 ```
 
-This will create the following structure in the current
-directory:
+This will create the following structure in the current directory:
 
 ```
 .
@@ -73,8 +72,7 @@ directory:
 ├── mod.ts
 ```
 
-If `git` is installed on the machine then `git init` will be run
-as well.
+If `git` is installed on the machine then `git init` will be run as well.
 
 Note that `mod` will not overwrite files unless the `--force` option is used
 explicitly. This means the program can 'fill in the blanks' in a project where
