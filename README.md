@@ -62,15 +62,7 @@ The program needs the following permissions to run:
 mod
 ```
 
-This will prompt you for the following:
-
-- Use TypeScript? (default `y`)
-- Set entrypoint: (default `mod.ts`)
-- Set dependency entrypoint: (default `deps.ts`)
-- Set dev dependency entrypoint: (default `dev_deps.ts`)
-- Add import map? (default `n`)
-
-Choosing all defaults will create the following structure in the current
+This will create the following structure in the current
 directory:
 
 ```
@@ -81,8 +73,7 @@ directory:
 ├── mod.ts
 ```
 
-If you choose to init with an import map an `import_map.json` file will be added
-to the above. If `git` is installed on the machine then `git init` will be run
+If `git` is installed on the machine then `git init` will be run
 as well.
 
 Note that `mod` will not overwrite files unless the `--force` option is used
