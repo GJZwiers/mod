@@ -7,7 +7,7 @@ export function ask(options: any) {
 
   const extension = (ts === "y" || ts === "Y") ? "ts" : "js";
   console.log(extension);
-  
+
   let entrypoint = prompt(
     `Set entrypoint:`,
     `mod.${extension}`,
@@ -43,7 +43,7 @@ export function ask(options: any) {
 
   if (hasFileExtension(entrypoint, extension) === false) {
     console.log("Ha!");
-    
+
     entrypoint = `${entrypoint}.${extension}`;
   }
 
