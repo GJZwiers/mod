@@ -44,17 +44,6 @@ const encoder = new TextEncoder();
 
 export const defaultModuleContent = encoder.encode("export {};\n");
 
-export const defaultTestModuleContent = encoder.encode(
-  `import { assert } from "https://deno.land/std@0.112.0/testing/asserts.ts"; 
-
-Deno.test({
-  name: "name",
-  fn() {
-    assert(true);
-  }
-});\n`,
-);
-
 export const defaults: Settings = {
   ascii: false,
   config: false,
@@ -89,3 +78,14 @@ target/`,
   initGit: initGit,
   addProjectFile: addProjectFile,
 };
+
+export const defaultTestModuleContent = encoder.encode(
+  `import { assert } from "./${defaults.devDepsEntrypoint}"; 
+
+Deno.test({
+  name: "name",
+  fn() {
+    assert(true);
+  }
+});\n`,
+);

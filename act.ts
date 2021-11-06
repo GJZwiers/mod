@@ -25,7 +25,7 @@ export async function act(settings: Settings) {
     );
   }
 
-  if (settings.config === true || settings.configOnly === true) {
+  if (settings.config || settings.configOnly) {
     await settings.addProjectFile(
       settings.name + "/deno.json",
       settings.configContent,
@@ -43,14 +43,9 @@ export async function act(settings: Settings) {
       defaultModuleContent,
     );
 
-    await settings.addProjectFile(
-      settings.name + "/" + settings.devDepsEntrypoint,
-      defaultModuleContent,
-    );
-
-    if (settings.tdd === true) {
+    if (settings.tdd) {
       const testFileName = settings.entrypoint.replace(
-        /^(.*)\.ts$/,
+        /^(.*)\.(?:ts|js)$/,
         function (_fullmatch: string, p1: string): string {
           return p1 + ".test." + settings.extension;
         },
@@ -59,9 +54,21 @@ export async function act(settings: Settings) {
         settings.name + "/" + testFileName,
         defaultTestModuleContent,
       );
+
+      await settings.addProjectFile(
+        settings.name + "/" + settings.devDepsEntrypoint,
+        new TextEncoder().encode(
+          'export { assert } from "https://deno.land/std@0.112.0/testing/asserts.ts"\n',
+        ),
+      );
+    } else {
+      await settings.addProjectFile(
+        settings.name + "/" + settings.devDepsEntrypoint,
+        defaultModuleContent,
+      );
     }
 
-    if (settings.git === true) {
+    if (settings.git) {
       await settings.initGit(settings.name);
     }
 
@@ -70,7 +77,7 @@ export async function act(settings: Settings) {
       settings.gitignoreContent,
     );
 
-    if (settings.ascii === true) {
+    if (settings.ascii) {
       const lines = asciiDeno.split(/\n/);
       let i = 0;
       for (const line of lines) {
