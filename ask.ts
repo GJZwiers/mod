@@ -1,4 +1,3 @@
-import { defaults } from "./settings.ts";
 import { hasFileExtension } from "./utils.ts";
 
 // deno-lint-ignore no-explicit-any
