@@ -21,7 +21,7 @@ export async function act(settings: Settings) {
     await Deno.mkdir(path, { recursive: true });
   }
 
-  if (settings.map) {
+  if (settings.importMap) {
     await settings.addProjectFile(
       `${path}/import_map.json`,
       settings.mapContent,

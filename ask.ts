@@ -22,7 +22,7 @@ export function ask(options: any) {
   ) ?? "dev_deps";
 
   let map = false;
-  if (!options.map) {
+  if (!options.importMap) {
     const importMap = prompt(
       "Add import map?",
       "n",

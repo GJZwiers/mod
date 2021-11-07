@@ -26,7 +26,7 @@ await new Command()
     "Force overwrite of existing files/directories. Helpful to re-initialize, but use with caution!",
   )
   .option(
-    "-m, --map [map:boolean]",
+    "-m, --import-map [importMap:boolean]",
     "Add an import map as part of the project.",
     {
       default: false,
@@ -69,4 +69,15 @@ await new Command()
       act({ ...defaults, ...options });
     }
   })
+  .help({
+    hints: false,
+  })
+  .example(
+    "Start a test-driven project",
+    "mod --tdd",
+  )
+  .example(
+    "Create a project with an import map and deno configuration file",
+    "mod --import-map -config",
+  )
   .parse(Deno.args);
