@@ -1,8 +1,7 @@
-import { assert, assertEquals } from "./dev_deps.ts";
+import { assert, assertEquals, assertThrows } from "./dev_deps.ts";
 import { act, runCommand } from "./act.ts";
 import { defaults } from "./settings.ts";
 import { sinon } from "./dev_deps.ts";
-import { assertThrows } from "https://deno.land/std@0.113.0/testing/asserts.ts";
 
 Deno.test("runCommand()", async (test) => {
   await test.step(
