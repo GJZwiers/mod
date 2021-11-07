@@ -41,12 +41,9 @@ To upgrade, run the command with a new version number and include `-f`.
 
 `mod` requires the following permissions
 
-- `read`: to check if files already exists before writing. Can be narrowed to
-  only the directory you want to make the module in:
-  `--allow-read=./my_project_dir` or `--allow-read=.`
+- `read`: to check if files already exists before writing.
 - `run=git`: to run `git` commands, more specifically `git init`
-- `write`: to make files as part of the project initialization. Can be narrowed
-  in the same way as the read permissions.
+- `write`: to make files as part of the project initialization.
 
 ## Usage
 
