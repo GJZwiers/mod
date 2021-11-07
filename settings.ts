@@ -15,7 +15,7 @@ export interface FlagSettings {
   configOnly: boolean;
   force: boolean;
   git: boolean;
-  map: boolean;
+  importMap: boolean;
   tdd: boolean;
 }
 
@@ -72,7 +72,7 @@ target/`,
   ),
   moduleContent: defaultModuleContent,
   name: ".",
-  map: false,
+  importMap: false,
   mapContent: encoder.encode(
     `{
   "imports": {}

@@ -43,7 +43,7 @@ Deno.test("act()", async (test) => {
     defaults.config = false;
     defaults.configOnly = false;
     defaults.git = false;
-    defaults.map = false;
+    defaults.importMap = false;
   };
 
   await test.step(
@@ -70,11 +70,11 @@ Deno.test("act()", async (test) => {
   );
 
   await test.step(
-    "create import_map.json if settings.map is true",
+    "create import_map.json if settings.importMap is true",
     async () => {
       await beforeEach();
 
-      defaults.map = true;
+      defaults.importMap = true;
 
       await act(defaults);
 
