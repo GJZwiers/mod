@@ -1,4 +1,4 @@
-import { assertEquals, assertThrowsAsync } from "./dev_deps.ts";
+import { assertEquals, assertThrows } from "./dev_deps.ts";
 import { hasNoFileExtension, writeFileSec } from "./utils.ts";
 
 Deno.test("writeFileOrWarn()", async (t) => {
@@ -59,8 +59,8 @@ Deno.test("mkdirOrWarn()", async (t) => {
     async () => {
       await Deno.mkdir(testDirPath);
 
-      await assertThrowsAsync(() => {
-        return Deno.mkdir(testDirPath);
+      assertThrows(() => {
+        return Deno.mkdirSync(testDirPath);
       });
 
       await afterEach();
