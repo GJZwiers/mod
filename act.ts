@@ -8,39 +8,37 @@ import {
 import { asciiDeno } from "./ascii.ts";
 
 export async function addProjectFile(filename: string, content: Uint8Array) {
-  await writeFileSec(
-    filename,
-    content,
-  );
+  await writeFileSec(filename, content);
 }
 
 export async function act(settings: Settings) {
-  if (settings.name !== ".") {
-    await Deno.mkdir(settings.name, { recursive: true });
+  const path = settings.name;
+  if (path !== ".") {
+    await Deno.mkdir(path, { recursive: true });
   }
 
-  if (settings.map === true) {
+  if (settings.map) {
     await settings.addProjectFile(
-      settings.name + "/import_map.json",
+      `${path}/import_map.json`,
       settings.mapContent,
     );
   }
 
   if (settings.config || settings.configOnly) {
     await settings.addProjectFile(
-      settings.name + "/deno.json",
+      `${path}/deno.json`,
       settings.configContent,
     );
   }
 
   if (!settings.configOnly) {
     await settings.addProjectFile(
-      settings.name + "/" + settings.entrypoint,
+      `${path}/${settings.entrypoint}`,
       defaultModuleContent,
     );
 
     await settings.addProjectFile(
-      settings.name + "/" + settings.depsEntrypoint,
+      `${path}/${settings.depsEntrypoint}`,
       defaultModuleContent,
     );
 
@@ -52,27 +50,27 @@ export async function act(settings: Settings) {
         },
       );
       await settings.addProjectFile(
-        settings.name + "/" + testFileName,
+        `${path}/${testFileName}`,
         defaultTestModuleContent,
       );
 
       await settings.addProjectFile(
-        settings.name + "/" + settings.devDepsEntrypoint,
+        `${path}/${settings.devDepsEntrypoint}`,
         defaultTestImportContent,
       );
     } else {
       await settings.addProjectFile(
-        settings.name + "/" + settings.devDepsEntrypoint,
+        `${path}/${settings.devDepsEntrypoint}`,
         defaultModuleContent,
       );
     }
 
     if (settings.git) {
-      await settings.initGit(settings.name);
+      await settings.initGit(path);
     }
 
     await settings.addProjectFile(
-      settings.name + "/" + settings.gitignore,
+      `${path}/${settings.gitignore}`,
       settings.gitignoreContent,
     );
 
@@ -89,10 +87,10 @@ export async function act(settings: Settings) {
   }
 }
 
-export async function initGit(name: string) {
+export async function initGit(path: string) {
   try {
     await runCommand(Deno.run({
-      cmd: ["git", "init", name],
+      cmd: ["git", "init", path],
     }));
   } catch (error) {
     console.warn(
