@@ -1,14 +1,16 @@
-import { defaults } from "./settings.ts";
+export interface WriteFileSecOptions extends Deno.WriteFileOptions {
+  force?: boolean;
+}
 
 /**
- * Attempts to write to a file, but warns instead of overwriting if it exists already.
+ * Attempts to write to a file, but warns instead of overwriting if it already exists.
  */
 async function writeFileSec(
   path: string | URL,
   data: Uint8Array,
-  options?: Deno.WriteFileOptions,
+  options?: WriteFileSecOptions,
 ): Promise<void> {
-  if (defaults.force) {
+  if (options?.force) {
     return await Deno.writeFile(path, data, options);
   }
 
