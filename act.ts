@@ -25,6 +25,7 @@ export async function act(settings: Settings) {
     await settings.addProjectFile(
       `${path}/import_map.json`,
       settings.mapContent,
+      { force: settings.force }
     );
   }
 
@@ -32,6 +33,7 @@ export async function act(settings: Settings) {
     await settings.addProjectFile(
       `${path}/deno.json`,
       settings.configContent,
+      { force: settings.force }
     );
   }
 
@@ -39,11 +41,13 @@ export async function act(settings: Settings) {
     await settings.addProjectFile(
       `${path}/${settings.entrypoint}`,
       defaultModuleContent,
+      { force: settings.force }
     );
 
     await settings.addProjectFile(
       `${path}/${settings.depsEntrypoint}`,
       defaultModuleContent,
+      { force: settings.force }
     );
 
     if (settings.tdd) {
@@ -56,16 +60,19 @@ export async function act(settings: Settings) {
       await settings.addProjectFile(
         `${path}/${testFileName}`,
         defaultTestModuleContent,
+        { force: settings.force }
       );
 
       await settings.addProjectFile(
         `${path}/${settings.devDepsEntrypoint}`,
         defaultTestImportContent,
+        { force: settings.force }
       );
     } else {
       await settings.addProjectFile(
         `${path}/${settings.devDepsEntrypoint}`,
         defaultModuleContent,
+        { force: settings.force }
       );
     }
 
@@ -76,6 +83,7 @@ export async function act(settings: Settings) {
     await settings.addProjectFile(
       `${path}/${settings.gitignore}`,
       settings.gitignoreContent,
+      { force: settings.force }
     );
 
     if (settings.ascii) {
