@@ -77,7 +77,7 @@ await new Command()
     "mod --tdd",
   )
   .example(
-    "Create a project with an import map and deno configuration file",
+    "Start a project with an import map and deno configuration file",
     "mod --import-map --config",
   )
   .parse(Deno.args);
