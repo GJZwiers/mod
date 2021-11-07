@@ -1,4 +1,4 @@
-import { writeFileSec } from "./utils.ts";
+import { writeFileSec, WriteFileSecOptions } from "./utils.ts";
 import {
   defaultModuleContent,
   defaultTestImportContent,
@@ -7,8 +7,12 @@ import {
 } from "./settings.ts";
 import { asciiDeno } from "./ascii.ts";
 
-export async function addProjectFile(filename: string, content: Uint8Array) {
-  await writeFileSec(filename, content);
+export async function addProjectFile(
+  filename: string,
+  content: Uint8Array,
+  options?: WriteFileSecOptions,
+) {
+  await writeFileSec(filename, content, options);
 }
 
 export async function act(settings: Settings) {

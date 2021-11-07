@@ -1,6 +1,5 @@
 import { assertEquals, assertThrowsAsync } from "./dev_deps.ts";
 import { hasFileExtension, writeFileSec } from "./utils.ts";
-import { defaults } from "./settings.ts";
 
 Deno.test("writeFileOrWarn()", async (t) => {
   const testFilePath = "./foo.ts";
@@ -27,15 +26,15 @@ Deno.test("writeFileOrWarn()", async (t) => {
   );
 
   await t.step("should overwrite when the force flag is set", async () => {
-    defaults.force = false;
-    await writeFileSec(testFilePath, testFileContent);
-    defaults.force = true;
-    await writeFileSec(testFilePath, new TextEncoder().encode("bar"));
+    await writeFileSec(testFilePath, testFileContent, { force: false });
+    await writeFileSec(testFilePath, new TextEncoder().encode("bar"), {
+      force: true,
+    });
 
     const file = await Deno.readFile(testFilePath);
 
     assertEquals(new TextDecoder().decode(file), "bar");
-    defaults.force = false;
+
     await afterEach();
   });
 

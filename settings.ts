@@ -1,4 +1,5 @@
 import { addProjectFile, initGit } from "./act.ts";
+import { WriteFileSecOptions } from "./utils.ts";
 
 export interface FileContentSettings {
   configContent: Uint8Array;
@@ -20,7 +21,11 @@ export interface FlagSettings {
 
 export interface InsertableTestSpies {
   initGit: (name: string) => Promise<void>;
-  addProjectFile: (filename: string, content: Uint8Array) => Promise<void>;
+  addProjectFile: (
+    filename: string,
+    content: Uint8Array,
+    options?: WriteFileSecOptions,
+  ) => Promise<void>;
 }
 
 export interface FileNameSettings {
