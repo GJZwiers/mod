@@ -51,7 +51,7 @@ Deno.test("act()", async (test) => {
     defaults.git = false;
     defaults.importMap = false;
 
-    gitSpy.resetHistory()
+    gitSpy.resetHistory();
     fileSpy.resetHistory();
   };
 
