@@ -16,7 +16,7 @@ async function writeFileSec(
     const file = await Deno.readFile(path);
     if (file) {
       console.warn(
-        `Warning: file ${path} already exists. Pass --force to overwrite.`,
+        `Warning: file ${path} already exists. Use --force if you want to overwrite files.`,
       );
     }
   } catch (_error) {
