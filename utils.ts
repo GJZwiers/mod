@@ -3,9 +3,9 @@ export interface WriteFileSecOptions extends Deno.WriteFileOptions {
 }
 
 /**
- * Attempts to write to a file, but warns instead of overwriting if it already exists.
+ * Attempts to write to a file, but warns instead of overwrites if it already exists.
  */
-async function writeFileSec(
+export async function writeFileSec(
   path: string | URL,
   data: Uint8Array,
   options?: WriteFileSecOptions,
@@ -26,8 +26,6 @@ async function writeFileSec(
   }
 }
 
-function hasFileExtension(filename: string, extension: string): boolean {
-  return new RegExp(`\.${extension}$`).test(filename);
+export function hasNoFileExtension(filename: string, extension: string): boolean {
+  return !new RegExp(`\.${extension}$`).test(filename);
 }
-
-export { hasFileExtension, writeFileSec };

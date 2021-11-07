@@ -1,4 +1,4 @@
-import { hasFileExtension } from "./utils.ts";
+import { hasNoFileExtension } from "./utils.ts";
 
 // deno-lint-ignore no-explicit-any
 export function ask(options: any) {
@@ -39,16 +39,16 @@ export function ask(options: any) {
     config = (withConfig === "y" || withConfig === "Y") ? true : false;
   }
 
-  if (hasFileExtension(entrypoint, extension) === false) {
+  if (hasNoFileExtension(entrypoint, extension)) {
     entrypoint = `${entrypoint}.${extension}`;
   }
 
-  if (hasFileExtension(depsEntrypoint, extension) === false) {
+  if (hasNoFileExtension(depsEntrypoint, extension)) {
     depsEntrypoint = `${depsEntrypoint}.${extension}`;
   }
 
   if (
-    hasFileExtension(devDepsEntrypoint, extension) === false
+    hasNoFileExtension(devDepsEntrypoint, extension)
   ) {
     devDepsEntrypoint = `${devDepsEntrypoint}.${extension}`;
   }
