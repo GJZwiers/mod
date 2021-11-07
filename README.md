@@ -10,7 +10,7 @@
 Try it without installing anything:
 
 ```
-deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v1.0.6/mod.ts -n my_deno_project
+deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v2.0.0/mod.ts -n my_deno_project
 ```
 
 ## Table of Contents
@@ -26,7 +26,7 @@ deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_
 Install the latest stable release from `deno.land` (or `nest.land`):
 
 ```
-deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v1.0.6/mod.ts
+deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.0.0/mod.ts
 ```
 
 Or install the latest unstable (unreleased) version from `GitHub`:
@@ -87,7 +87,7 @@ This will create the following file and directory structure:
 ## Options
 
 To see what options and flags are available use `mod --help` if you have the CLI
-installed or `deno run https://deno.land/x/mod@v1.0.6/mod.ts --help`
+installed or `deno run https://deno.land/x/mod@v2.0.0/mod.ts --help`
 
 ## Contributing
 
