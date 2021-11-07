@@ -1,4 +1,4 @@
-import { assert, assertEquals, assertThrowsAsync } from "./dev_deps.ts";
+import { assert, assertEquals } from "./dev_deps.ts";
 import { act, runCommand } from "./act.ts";
 import { defaults } from "./settings.ts";
 import { sinon } from "./dev_deps.ts";
