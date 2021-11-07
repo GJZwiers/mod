@@ -111,8 +111,11 @@ export async function initGit(path: string) {
   }
 }
 
-// deno-lint-ignore no-explicit-any
-export async function runCommand(cmd: any): Promise<boolean> {
+export async function runCommand(
+  cmd: Deno.Process<{
+    cmd: string[] | [URL, ...string[]];
+  }>,
+): Promise<boolean> {
   const status = await cmd.status();
 
   cmd.close();
