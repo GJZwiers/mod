@@ -10,7 +10,7 @@
 Try it without installing anything:
 
 ```
-deno run --allow-read --allow-run=git --allow-write https://deno.land/x/mod@v1.0.6/mod.ts -n awesome_deno_project
+deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v1.0.6/mod.ts -n my_deno_project
 ```
 
 ## Table of Contents
@@ -41,9 +41,12 @@ To upgrade, run the command with a new version number and include `-f`.
 
 `mod` requires the following permissions
 
-- `read`: to check if files already exists before writing
+- `read`: to check if files already exists before writing. Can be narrowed to
+  only the directory you want to make the module in:
+  `--allow-read=./my_project_dir` or `--allow-read=.`
 - `run=git`: to run `git` commands, more specifically `git init`
-- `write`: to make files as part of the project initialization
+- `write`: to make files as part of the project initialization. Can be narrowed
+  in the same way as the read permissions.
 
 ## Usage
 
