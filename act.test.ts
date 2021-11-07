@@ -34,6 +34,12 @@ Deno.test("runCommand()", async (test) => {
 Deno.test("act()", async (test) => {
   defaults.name = "test_directory_act";
 
+  const standardFiles = ["mod.ts", "deps.ts", "dev_deps.ts", ".gitignore"];
+
+  const gitSpy = sinon.spy(defaults, "initGit");
+
+  const fileSpy = sinon.spy(defaults, "addProjectFile");
+
   const beforeEach = async () => {
     await Deno.mkdir(defaults.name, { recursive: true });
   };
@@ -44,6 +50,9 @@ Deno.test("act()", async (test) => {
     defaults.configOnly = false;
     defaults.git = false;
     defaults.importMap = false;
+
+    gitSpy.resetHistory();
+    fileSpy.resetHistory();
   };
 
   await test.step(
@@ -53,16 +62,10 @@ Deno.test("act()", async (test) => {
 
       defaults.git = true;
 
-      const spy = sinon.spy(defaults, "initGit");
-      const addSpy = sinon.spy(defaults, "addProjectFile");
-
       await act(defaults);
 
-      assertEquals(spy.called, true);
-
-      assertEquals(addSpy.called, true);
-      assertEquals(addSpy.getCalls().length, 4);
-
+      assertEquals(gitSpy.getCalls().length, 1);
+      assertEquals(fileSpy.getCalls().length, standardFiles.length);
       assert(`${defaults.name}/.git`);
 
       await afterEach();
@@ -77,6 +80,9 @@ Deno.test("act()", async (test) => {
       defaults.importMap = true;
 
       await act(defaults);
+
+      assertEquals(gitSpy.getCalls().length, 0);
+      assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
       const mapFile = await Deno.readFile(
         `${defaults.name}/import_map.json`,
@@ -97,6 +103,9 @@ Deno.test("act()", async (test) => {
 
       await act(defaults);
 
+      assertEquals(gitSpy.getCalls().length, 0);
+      assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
+
       const configFile = await Deno.readFile(
         `${defaults.name}/deno.json`,
       );
@@ -116,11 +125,14 @@ Deno.test("act()", async (test) => {
 
       await act(defaults);
 
-      const mapFile = await Deno.readFile(
+      assertEquals(gitSpy.getCalls().length, 0);
+      assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
+
+      const testFile = await Deno.readFile(
         `${defaults.name}/mod.test.ts`,
       );
 
-      assert(mapFile);
+      assert(testFile);
 
       await afterEach();
     },
@@ -134,6 +146,9 @@ Deno.test("act()", async (test) => {
       defaults.configOnly = true;
 
       await act(defaults);
+
+      assertEquals(gitSpy.getCalls().length, 0);
+      assertEquals(fileSpy.getCalls().length, 1);
 
       const configFile = await Deno.readFile(
         `${defaults.name}/deno.json`,
