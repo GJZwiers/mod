@@ -2,6 +2,7 @@ import { assert, assertEquals, assertThrowsAsync } from "./dev_deps.ts";
 import { act, runCommand } from "./act.ts";
 import { defaults } from "./settings.ts";
 import { sinon } from "./dev_deps.ts";
+import { assertThrows } from "https://deno.land/std@0.113.0/testing/asserts.ts";
 
 Deno.test("runCommand()", async (test) => {
   await test.step(
@@ -84,7 +85,7 @@ Deno.test("act()", async (test) => {
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
-      const mapFile = await Deno.readFile(
+      const mapFile = Deno.readFileSync(
         `${defaults.name}/import_map.json`,
       );
 
@@ -106,7 +107,7 @@ Deno.test("act()", async (test) => {
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
-      const configFile = await Deno.readFile(
+      const configFile = Deno.readFileSync(
         `${defaults.name}/deno.json`,
       );
 
@@ -128,7 +129,7 @@ Deno.test("act()", async (test) => {
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
-      const testFile = await Deno.readFile(
+      const testFile = Deno.readFileSync(
         `${defaults.name}/mod.test.ts`,
       );
 
@@ -150,20 +151,20 @@ Deno.test("act()", async (test) => {
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, 1);
 
-      const configFile = await Deno.readFile(
+      const configFile = Deno.readFileSync(
         `${defaults.name}/deno.json`,
       );
 
       assert(configFile);
 
-      await assertThrowsAsync(async () => {
-        await Deno.readFile(`${defaults.name}/mod.ts`);
+      assertThrows(() => {
+        Deno.readFileSync(`${defaults.name}/mod.ts`);
       });
-      await assertThrowsAsync(async () => {
-        await Deno.readFile(`${defaults.name}/deps.ts`);
+      assertThrows(() => {
+        Deno.readFileSync(`${defaults.name}/deps.ts`);
       });
-      await assertThrowsAsync(async () => {
-        await Deno.readFile(`${defaults.name}/dev_deps.ts`);
+      assertThrows(() => {
+        Deno.readFileSync(`${defaults.name}/dev_deps.ts`);
       });
 
       await afterEach();
