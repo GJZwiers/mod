@@ -78,6 +78,6 @@ await new Command()
   )
   .example(
     "Create a project with an import map and deno configuration file",
-    "mod --import-map -config",
+    "mod --import-map --config",
   )
   .parse(Deno.args);
