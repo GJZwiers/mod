@@ -1,6 +1,7 @@
 import { writeFileSec } from "./utils.ts";
 import {
   defaultModuleContent,
+  defaultTestImportContent,
   defaultTestModuleContent,
   Settings,
 } from "./settings.ts";
@@ -57,9 +58,7 @@ export async function act(settings: Settings) {
 
       await settings.addProjectFile(
         settings.name + "/" + settings.devDepsEntrypoint,
-        new TextEncoder().encode(
-          'export { assert } from "https://deno.land/std@0.113.0/testing/asserts.ts"\n',
-        ),
+        defaultTestImportContent,
       );
     } else {
       await settings.addProjectFile(
