@@ -26,6 +26,9 @@ export async function writeFileSec(
   }
 }
 
-export function hasNoFileExtension(filename: string, extension: string): boolean {
+export function hasNoFileExtension(
+  filename: string,
+  extension: string,
+): boolean {
   return !new RegExp(`\.${extension}$`).test(filename);
 }
