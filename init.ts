@@ -33,6 +33,13 @@ await new Command()
     },
   )
   .option(
+    "--js [js:boolean]",
+    "Use JavaScript instead of TypeScript for the module",
+    {
+      default: false,
+    },
+  )
+  .option(
     "--no-git [git:boolean]",
     "Do not initialize a local Git repository for the project.",
   )

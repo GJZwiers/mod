@@ -17,6 +17,7 @@ export interface FlagSettings {
   git: boolean;
   importMap: boolean;
   tdd: boolean;
+  js: boolean;
 }
 
 export interface InsertableTestSpies {
@@ -55,9 +56,9 @@ export const defaults: Settings = {
   configContent: encoder.encode("{\n\t\n}"),
   configOnly: false,
   extension: "ts",
-  entrypoint: "mod.ts",
-  depsEntrypoint: "deps.ts",
-  devDepsEntrypoint: "dev_deps.ts",
+  entrypoint: "mod",
+  depsEntrypoint: "deps",
+  devDepsEntrypoint: "dev_deps",
   depsModuleContent: defaultModuleContent,
   force: false,
   git: true,
@@ -82,10 +83,11 @@ target/`,
   tdd: false,
   initGit: initGit,
   addProjectFile: addProjectFile,
+  js: false,
 };
 
 export const defaultTestModuleContent = encoder.encode(
-  `import { assert } from "./${defaults.devDepsEntrypoint}"; 
+  `import { assert } from "./${defaults.devDepsEntrypoint}.{{extension}}"; 
 
 Deno.test({
   name: "name",

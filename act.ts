@@ -21,6 +21,10 @@ export async function act(settings: Settings) {
     await Deno.mkdir(path, { recursive: true });
   }
 
+  if (settings.js) {
+    settings.extension = "js";
+  }
+
   if (settings.importMap) {
     await settings.addProjectFile(
       `${path}/import_map.json`,
@@ -39,38 +43,39 @@ export async function act(settings: Settings) {
 
   if (!settings.configOnly) {
     await settings.addProjectFile(
-      `${path}/${settings.entrypoint}`,
+      `${path}/${settings.entrypoint}.${settings.extension}`,
       defaultModuleContent,
       { force: settings.force },
     );
 
     await settings.addProjectFile(
-      `${path}/${settings.depsEntrypoint}`,
+      `${path}/${settings.depsEntrypoint}.${settings.extension}`,
       defaultModuleContent,
       { force: settings.force },
     );
 
     if (settings.tdd) {
-      const testFileName = settings.entrypoint.replace(
-        /^(.*)\.(?:ts|js)$/,
-        function (_fullmatch: string, p1: string): string {
-          return p1 + ".test." + settings.extension;
-        },
+      const testModString = new TextDecoder().decode(defaultTestModuleContent);
+      const replaced = testModString.replace(
+        /\{\{extension\}\}/,
+        settings.extension,
       );
+      const testModBytes = new TextEncoder().encode(replaced);
+
       await settings.addProjectFile(
-        `${path}/${testFileName}`,
-        defaultTestModuleContent,
+        `${path}/${settings.entrypoint}.test.${settings.extension}`,
+        testModBytes,
         { force: settings.force },
       );
 
       await settings.addProjectFile(
-        `${path}/${settings.devDepsEntrypoint}`,
+        `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
         defaultTestImportContent,
         { force: settings.force },
       );
     } else {
       await settings.addProjectFile(
-        `${path}/${settings.devDepsEntrypoint}`,
+        `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
         defaultModuleContent,
         { force: settings.force },
       );
