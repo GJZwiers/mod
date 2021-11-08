@@ -18,7 +18,7 @@ deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_
 
 - [Installation](#installation)
 - [Permissions](#permissions)
-- [Basic Usage](#basic-usage)
+- [Usage](#usage)
 - [Options](#options)
 - [Contributing](#contributing)
 
