@@ -52,6 +52,7 @@ Deno.test("act()", async (context) => {
     defaults.configOnly = false;
     defaults.git = false;
     defaults.importMap = false;
+    defaults.tdd = false;
 
     fileSpy.resetHistory();
     gitSpy.resetHistory();
@@ -137,6 +138,28 @@ Deno.test("act()", async (context) => {
       );
 
       assert(testFile);
+    },
+  });
+
+  await test({
+    name: "create .js files when settings.js is true",
+    fn: async () => {
+      defaults.js = true;
+
+      await act(defaults);
+
+      assertEquals(gitSpy.getCalls().length, 0);
+      assertEquals(fileSpy.getCalls().length, standardFiles.length);
+
+      assert(
+        Deno.readFileSync(`${defaults.name}/mod.js`),
+      );
+      assert(
+        Deno.readFileSync(`${defaults.name}/deps.js`),
+      );
+      assert(
+        Deno.readFileSync(`${defaults.name}/dev_deps.js`),
+      );
     },
   });
 
