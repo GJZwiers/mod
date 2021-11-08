@@ -5,7 +5,7 @@
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/mod)
 ![GitHub](https://img.shields.io/github/license/GJZwiers/mod)
 
-`mod` is a command line tool to quickly scaffold a new Deno project. It requires
+`mod` is a command line tool to quickly scaffold a new Deno module. It requires
 `deno` and optionally `git`.
 
 Try it without installing anything:
