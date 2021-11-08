@@ -56,7 +56,10 @@ export async function act(settings: Settings) {
 
     if (settings.tdd) {
       const testModString = new TextDecoder().decode(defaultTestModuleContent);
-      const replaced = testModString.replace(/\{\{extension\}\}/, settings.extension);
+      const replaced = testModString.replace(
+        /\{\{extension\}\}/,
+        settings.extension,
+      );
       const testModBytes = new TextEncoder().encode(replaced);
 
       await settings.addProjectFile(
