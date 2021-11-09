@@ -10,7 +10,7 @@
 
 Try it without installing anything:
 
-```
+```console
 deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v2.1.0/mod.ts -n my_deno_project
 ```
 
@@ -26,13 +26,13 @@ deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_
 
 Install the latest stable release from `deno.land` (or `nest.land`):
 
-```
+```console
 deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.1.0/mod.ts
 ```
 
 Or install the latest unstable (unreleased) version from `GitHub`:
 
-```
+```console
 deno install --allow-read --allow-run=git --allow-write -n mod https://raw.githubusercontent.com/GJZwiers/mod/main/mod.ts
 ```
 
@@ -48,7 +48,7 @@ To upgrade, run the command with a new version number and include `-f`.
 
 ## Usage
 
-```
+```console
 mod
 ```
 
@@ -70,13 +70,13 @@ If `git` is installed on the machine then `git init` will be run as well.
 
 To create the new module in a new directory:
 
-```
+```console
 mod --name my_deno_project
 ```
 
 This will create the following file and directory structure:
 
-```
+```console
 .
 ├── my_deno_project
 |   ├── .gitignore
