@@ -1,9 +1,9 @@
 import { writeFileSec, WriteFileSecOptions } from "./utils.ts";
 import {
+  actions,
   defaultModuleContent,
   defaultTestImportContent,
   defaultTestModuleContent,
-  actions,
   Settings,
 } from "./settings.ts";
 import { asciiDeno } from "./ascii.ts";

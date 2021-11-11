@@ -59,7 +59,7 @@ await new Command()
     "Add a GitHub Actions CI workflow for the module.",
     {
       default: false,
-    }
+    },
   )
   .option(
     "-p, --prompt [prompt:boolean]",
@@ -92,11 +92,11 @@ await new Command()
   )
   .example(
     "Start a JavaScript project for Deno",
-    "mod --js"
+    "mod --js",
   )
   .example(
     "Start a project and include a CI pipeline (GitHub Actions)",
-    "mod --ci"
+    "mod --ci",
   )
   .example(
     "Start a project with an import map and deno configuration file",
