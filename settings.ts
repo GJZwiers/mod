@@ -106,10 +106,7 @@ export const defaultTestImportContent = encoder.encode(
 
 export const actions = encoder.encode(YAML.stringify({
   name: "build",
-  on: [
-    "push",
-    "pull_request",
-  ],
+  on: "push",
   jobs: {
     build: {
       "runs-on": "${{ matrix.os }",
