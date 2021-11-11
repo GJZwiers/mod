@@ -55,6 +55,13 @@ await new Command()
     },
   )
   .option(
+    "--ci [ci:boolean]",
+    "Add a GitHub Actions CI workflow for the module.",
+    {
+      default: false,
+    },
+  )
+  .option(
     "-p, --prompt [prompt:boolean]",
     "Answer a series of prompts in order to set up the module.",
     {
@@ -82,6 +89,14 @@ await new Command()
   .example(
     "Start a test-driven project",
     "mod --tdd",
+  )
+  .example(
+    "Start a JavaScript project for Deno",
+    "mod --js",
+  )
+  .example(
+    "Start a project and include a CI pipeline (GitHub Actions)",
+    "mod --ci",
   )
   .example(
     "Start a project with an import map and deno configuration file",

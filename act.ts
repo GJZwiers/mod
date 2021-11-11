@@ -1,5 +1,6 @@
 import { writeFileSec, WriteFileSecOptions } from "./utils.ts";
 import {
+  actions,
   defaultModuleContent,
   defaultTestImportContent,
   defaultTestModuleContent,
@@ -78,6 +79,16 @@ export async function act(settings: Settings) {
         `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
         defaultModuleContent,
         { force: settings.force },
+      );
+    }
+
+    if (settings.ci) {
+      const actionsPath = `${path}/.github/workflows`;
+      await Deno.mkdir(actionsPath, { recursive: true });
+
+      await settings.addProjectFile(
+        `${actionsPath}/build.yaml`,
+        actions,
       );
     }
 

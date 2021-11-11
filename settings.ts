@@ -1,5 +1,6 @@
 import { addProjectFile, initGit } from "./act.ts";
 import { WriteFileSecOptions } from "./utils.ts";
+import { YAML } from "./deps.ts";
 
 export interface FileContentSettings {
   configContent: Uint8Array;
@@ -18,6 +19,7 @@ export interface FlagSettings {
   importMap: boolean;
   tdd: boolean;
   js: boolean;
+  ci: boolean;
 }
 
 export interface InsertableTestSpies {
@@ -66,8 +68,8 @@ export const defaults: Settings = {
   gitignoreContent: encoder.encode(
     `.env
 .vscode/
-coverage/
 cov/
+coverage/
 lcov/
 target/`,
   ),
@@ -84,6 +86,7 @@ target/`,
   initGit: initGit,
   addProjectFile: addProjectFile,
   js: false,
+  ci: false,
 };
 
 export const defaultTestModuleContent = encoder.encode(
@@ -100,3 +103,43 @@ Deno.test({
 export const defaultTestImportContent = encoder.encode(
   'export { assert } from "https://deno.land/std@0.112.0/testing/asserts.ts";\n',
 );
+
+export const actions = encoder.encode(YAML.stringify({
+  name: "build",
+  on: "push",
+  jobs: {
+    build: {
+      "runs-on": "${{ matrix.os }",
+      strategy: {
+        matrix: {
+          os: ["ubuntu-latest"],
+        },
+      },
+      steps: [
+        {
+          name: "Set up Actions",
+          uses: "actions/checkout@v2",
+        },
+        {
+          name: "Set up Deno",
+          uses: "denoland/setup-deno@v1.1.0",
+          with: {
+            "deno-version": "v1.x.x",
+          },
+        },
+        {
+          name: "Check format",
+          run: "deno fmt --check",
+        },
+        {
+          name: "Check code issues",
+          run: "deno lint",
+        },
+        {
+          name: "Run tests and collect code coverage",
+          run: "deno test -A --coverage=cov",
+        },
+      ],
+    },
+  },
+}));

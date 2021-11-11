@@ -53,6 +53,7 @@ Deno.test("act()", async (context) => {
     defaults.git = false;
     defaults.importMap = false;
     defaults.tdd = false;
+    defaults.ci = false;
 
     fileSpy.resetHistory();
     gitSpy.resetHistory();
@@ -189,6 +190,24 @@ Deno.test("act()", async (context) => {
       assertThrows(() => {
         Deno.readFileSync(`${defaults.name}/dev_deps.ts`);
       });
+    },
+  });
+
+  await test({
+    name: "create workflow file if settings.ci is true",
+    fn: async () => {
+      defaults.ci = true;
+
+      await act(defaults);
+
+      assertEquals(gitSpy.getCalls().length, 0);
+      assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
+
+      const workflowFile = Deno.readFileSync(
+        `${defaults.name}/.github/workflows/build.yaml`,
+      );
+
+      assert(workflowFile);
     },
   });
 });
