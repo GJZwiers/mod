@@ -76,7 +76,7 @@ mod --name my_deno_project
 
 This will create the following file and directory structure:
 
-```console
+```
 .
 ├── my_deno_project
 |   ├── .gitignore
@@ -91,7 +91,7 @@ This will create the following file and directory structure:
 mod -n my_deno_project --ci
 ```
 
-```console
+```
 .
 ├── my_deno_project
 |   ├── .github
