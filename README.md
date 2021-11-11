@@ -11,7 +11,7 @@
 Try it without installing anything:
 
 ```console
-deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v2.1.0/mod.ts -n my_deno_project
+deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v2.2.0/mod.ts -n my_deno_project
 ```
 
 ## Table of Contents
@@ -27,7 +27,7 @@ deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_
 Install the latest stable release from `deno.land` (or `nest.land`):
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.1.0/mod.ts
+deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.2.0/mod.ts
 ```
 
 Or install the latest unstable (unreleased) version from `GitHub`:
@@ -76,9 +76,27 @@ mod --name my_deno_project
 
 This will create the following file and directory structure:
 
-```console
+```
 .
 ├── my_deno_project
+|   ├── .gitignore
+|   ├── deps.ts
+|   ├── dev_deps.ts
+|   ├── mod.ts
+```
+
+`mod` can also create other files along with the basics, such as a pipeline:
+
+```console
+mod -n my_deno_project --ci
+```
+
+```
+.
+├── my_deno_project
+|   ├── .github
+|   |   ├── workflows
+|   |   |   ├── build.yaml
 |   ├── .gitignore
 |   ├── deps.ts
 |   ├── dev_deps.ts
@@ -90,7 +108,7 @@ This will create the following file and directory structure:
 `mod` can create other files with the module, such as an import map or a deno
 configuration file. To see what options and flags are available use `mod --help`
 if you have the CLI installed or
-`deno run https://deno.land/x/mod@v2.1.0/mod.ts --help`
+`deno run https://deno.land/x/mod@v2.2.0/mod.ts --help`
 
 ## Contributing
 
