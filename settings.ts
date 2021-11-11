@@ -109,7 +109,7 @@ export const actions = encoder.encode(YAML.stringify({
   on: "push",
   jobs: {
     build: {
-      "runs-on": "${{ matrix.os }",
+      "runs-on": "${{ matrix.os }}",
       strategy: {
         matrix: {
           os: ["ubuntu-latest"],
