@@ -10,13 +10,8 @@
 
 Try it without installing anything:
 
-```
-deno run \
---allow-read=./my_deno_project \
---allow-run=git \
---allow-write=./my_deno_project \
-https://deno.land/x/mod@v2.1.0/mod.ts \
--n my_deno_project
+```console
+deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v2.1.0/mod.ts -n my_deno_project
 ```
 
 ## Table of Contents

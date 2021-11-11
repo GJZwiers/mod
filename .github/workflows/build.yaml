@@ -1,9 +1,8 @@
-name: Build
+name: build
 
 on:
-  push:
-  pull_request:
-    types: [ opened, edited, reopened, review_requested ]
+  - push:
+  - pull_request:
 
 jobs:
   build:
@@ -19,22 +18,22 @@ jobs:
           git config --system core.autocrlf false
           git config --system core.eol lf
 
-      - name: Setup Actions
+      - name: Set up Actions
         uses: actions/checkout@v2
 
-      - name: Setup Deno
+      - name: Set up Deno
         uses: denoland/setup-deno@v1.1.0
         with:
           deno-version: v1.x.x
 
-      - name: Check formatting
+      - name: Check format
         run: deno fmt --check
 
-      - name: Analyze code with Deno linter
+      - name: Check code issues
         run: deno lint
 
-      - name: Run unit tests
-        run: deno test -A --coverage=cov --doc --unstable
+      - name: Run tests and collect code coverage
+        run: deno test -A --coverage=cov --unstable
 
       - name: Generate coverage report
         if: ${{ matrix.os == 'ubuntu-latest' }}
