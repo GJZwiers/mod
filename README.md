@@ -85,6 +85,24 @@ This will create the following file and directory structure:
 |   ├── mod.ts
 ```
 
+`mod` can also create other files along with the basics, such as a pipeline:
+
+```console
+mod -n my_deno_project --ci
+```
+
+```console
+.
+├── my_deno_project
+|   ├── .github
+|   |   ├── workflows
+|   |   |   ├── build.yaml
+|   ├── .gitignore
+|   ├── deps.ts
+|   ├── dev_deps.ts
+|   ├── mod.ts
+```
+
 ## Options
 
 `mod` can create other files with the module, such as an import map or a deno
