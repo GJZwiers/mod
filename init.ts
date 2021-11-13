@@ -85,6 +85,7 @@ await new Command()
   })
   .help({
     hints: false,
+    colors: false,
   })
   .example(
     "Start a test-driven project",
