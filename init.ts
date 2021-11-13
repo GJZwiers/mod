@@ -8,6 +8,38 @@ await new Command()
   .version("v2.2.2")
   .description("Start a new Deno project with a single command")
   .option(
+    "--js [js:boolean]",
+    "Use JavaScript instead of TypeScript for the module",
+    {
+      default: false,
+    },
+  )
+  .option(
+    "-n, --name [name:string]",
+    "Create the project in a new directory with the entered name.",
+  )
+  .option(
+    "-p, --prompt [prompt:boolean]",
+    "Answer a series of prompts in order to set up the module.",
+    {
+      default: false,
+    },
+  )
+  .option(
+    "--ci [ci:boolean]",
+    "Add a GitHub Actions CI workflow for the module.",
+    {
+      default: false,
+    },
+  )
+  .option(
+    "-t, --tdd [tdd:boolean]",
+    "Create the project with a file for tests. Note: std/testing won't be cached automatically.",
+    {
+      default: false,
+    },
+  )
+  .option(
     "-c, --config [config:boolean]",
     "Add a deno.json configuration file as part of the project.",
     {
@@ -22,10 +54,6 @@ await new Command()
     },
   )
   .option(
-    "-f, --force [force:boolean]",
-    "Force overwrite of existing files/directories. Helpful to re-initialize, but use with caution!",
-  )
-  .option(
     "-m, --import-map [importMap:boolean]",
     "Add an import map as part of the project.",
     {
@@ -33,44 +61,16 @@ await new Command()
     },
   )
   .option(
-    "--js [js:boolean]",
-    "Use JavaScript instead of TypeScript for the module",
-    {
-      default: false,
-    },
+    "-f, --force [force:boolean]",
+    "Force overwrite of existing files/directories. Use with caution!",
   )
   .option(
     "--no-git [git:boolean]",
-    "Do not initialize a local Git repository for the project.",
-  )
-  .option(
-    "-n, --name [name:string]",
-    "Create the project in a new directory with the entered name.",
-  )
-  .option(
-    "-t, --tdd [tdd:boolean]",
-    "Create the project with a file for tests.",
-    {
-      default: false,
-    },
-  )
-  .option(
-    "--ci [ci:boolean]",
-    "Add a GitHub Actions CI workflow for the module.",
-    {
-      default: false,
-    },
-  )
-  .option(
-    "-p, --prompt [prompt:boolean]",
-    "Answer a series of prompts in order to set up the module.",
-    {
-      default: false,
-    },
+    "Don't initialize a local Git repository for the project.",
   )
   .option(
     "-a, --ascii [ascii:boolean]",
-    "Initialize an ASCII Deno to the screen!",
+    "Draw an ASCII Deno to the screen after module creation succeeds!",
     {
       default: false,
     },
@@ -85,21 +85,22 @@ await new Command()
   })
   .help({
     hints: false,
+    colors: false,
   })
   .example(
     "Start a test-driven project",
     "mod --tdd",
   )
   .example(
-    "Start a JavaScript project for Deno",
+    "Use JavaScript instead of TypeScript",
     "mod --js",
   )
   .example(
-    "Start a project and include a CI pipeline (GitHub Actions)",
+    "Include a CI pipeline (GitHub Actions)",
     "mod --ci",
   )
   .example(
-    "Start a project with an import map and deno configuration file",
+    "Add an import map and deno configuration file",
     "mod --import-map --config",
   )
   .parse(Deno.args);
