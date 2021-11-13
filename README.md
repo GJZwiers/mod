@@ -30,7 +30,7 @@ https://deno.land/x/mod@v2.2.2/mod.ts \
 <summary>PowerShell</summary>
 <p>
 
-```powershell
+```console
 deno run `
 --allow-read=./my_deno_project `
 --allow-run=git `
