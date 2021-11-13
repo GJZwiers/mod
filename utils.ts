@@ -1,3 +1,5 @@
+import { log } from "./dev_deps.ts";
+
 export interface WriteFileSecOptions extends Deno.WriteFileOptions {
   force?: boolean;
 }
@@ -17,8 +19,8 @@ export async function writeFileSec(
   try {
     const file = await Deno.readFile(path);
     if (file) {
-      console.warn(
-        `Warning: file ${path} already exists. Use --force if you want to overwrite files.`,
+      log.warning(
+        `File ${path} already exists. Use --force if you want to overwrite files.`,
       );
     }
   } catch (_error) {

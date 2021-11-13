@@ -7,6 +7,7 @@ import {
   Settings,
 } from "./settings.ts";
 import { asciiDeno } from "./ascii.ts";
+import { log } from "./dev_deps.ts";
 
 export async function addProjectFile(
   filename: string,
@@ -121,8 +122,8 @@ export async function initGit(path: string) {
       cmd: ["git", "init", path],
     }));
   } catch (error) {
-    console.warn(
-      "Warning: Could not initialize Git repository. Error:" + error,
+    log.warning(
+      "Could not initialize Git repository. Error:" + error,
     );
   }
 }
