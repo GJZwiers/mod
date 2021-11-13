@@ -66,6 +66,9 @@ Note that `mod` does not overwrite files unless `--force` is used explicitly.
 This means the program can also be used to 'fill in the blanks' in a directory
 where not all of the files above are present yet.
 
+Also note that `mod` does not perform editor-specific setups such as enabling
+Deno in VS Code via `.vscode/settings.json`.
+
 If `git` is installed on the machine then `git init` will be run as well.
 
 To create the new module in a new directory:
