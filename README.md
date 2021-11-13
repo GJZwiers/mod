@@ -10,9 +10,37 @@
 
 Try it without installing anything:
 
-```console
-deno run --allow-read=./my_deno_project --allow-run=git --allow-write=./my_deno_project https://deno.land/x/mod@v2.2.2/mod.ts -n my_deno_project
+<details open>
+<summary>Bash/Zsh</summary>
+<p>
+
+```bash
+deno run \
+--allow-read=./my_deno_project \
+--allow-run=git \
+--allow-write=./my_deno_project \
+https://deno.land/x/mod@v2.2.2/mod.ts \
+--name my_deno_project
 ```
+
+</p>
+</details>
+
+<details>
+<summary>PowerShell</summary>
+<p>
+
+```console
+deno run `
+--allow-read=./my_deno_project `
+--allow-run=git `
+--allow-write=./my_deno_project `
+https://deno.land/x/mod@v2.2.2/mod.ts `
+--name my_deno_project
+```
+
+</p>
+</details>
 
 ## Table of Contents
 
