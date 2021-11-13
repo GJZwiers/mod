@@ -49,7 +49,7 @@ await new Command()
   )
   .option(
     "-t, --tdd [tdd:boolean]",
-    "Create the project with a file for tests.",
+    "Create the project with a file for tests. Note: std/testing won't be cached automatically",
     {
       default: false,
     },
