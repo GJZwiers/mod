@@ -10,32 +10,32 @@ jobs:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
         # deno-version: [vx.x.x, canary]
     steps:
-      uses: actions/checkout@v2
-      uses: denoland/setup-deno@v1.1.0
-      with:
-        deno-version: v1.x.x
-    - name: Configure line-endings for Windows builds
-      if: ${{ matrix.os == 'windows-latest' }}
-      run: |
-        git config --system core.autocrlf false
-        git config --system core.eol lf
+      - uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1.1.0
+        with:
+          deno-version: v1.x.x
+      - name: Configure line-endings for Windows builds
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          git config --system core.autocrlf false
+          git config --system core.eol lf
 
-    - name: Check format
-      run: deno fmt --check
+      - name: Check format
+        run: deno fmt --check
 
-    - name: Check code issues
-      run: deno lint
+      - name: Check code issues
+        run: deno lint
 
-    - name: Run tests and collect code coverage
-      run: deno test -A --coverage=cov --unstable
+      - name: Run tests and collect code coverage
+        run: deno test -A --coverage=cov --unstable
 
-    - name: Generate coverage report
-      if: ${{ matrix.os == 'ubuntu-latest' }}
-      run: deno coverage --lcov cov > cov.lcov
+      - name: Generate coverage report
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: deno coverage --lcov cov > cov.lcov
 
-    - name: Upload coverage report
-      if: ${{ matrix.os == 'ubuntu-latest' }}
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: cov.lcov
+      - name: Upload coverage report
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: cov.lcov

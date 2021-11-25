@@ -1,4 +1,4 @@
-name: Publish Egg
+name: publish egg
 
 on:
   release:
@@ -9,11 +9,10 @@ jobs:
   publish:
     runs-on: ubuntu-20.04
     steps:
-        uses: actions/checkout@v2
-        uses: denolib/setup-deno@v2
+      - uses: actions/checkout@v2
+      - uses: denolib/setup-deno@v2
         with:
-           deno-version: v1.5.x
-          
+          deno-version: v1.5.x   
       - name: Release
         run: |
           deno install -Af --unstable https://x.nest.land/eggs@0.3.8/eggs.ts
