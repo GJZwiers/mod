@@ -15,15 +15,11 @@ jobs:
         run: |
           git config --system core.autocrlf false
           git config --system core.eol lf
-
-      - name: Set up Actions
-        uses: actions/checkout@v2
-
-      - name: Set up Deno
-        uses: denoland/setup-deno@v1.1.0
+      - uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1.1.0
         with:
           deno-version: v1.x.x
-
+          
       - name: Check format
         run: deno fmt --check
 
