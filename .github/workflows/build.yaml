@@ -13,7 +13,6 @@ jobs:
       - name: Configure line-endings for Windows builds
         if: ${{ matrix.os == 'windows-2019' }}
         run: |
-          git config --global init.defaultBranch main
           git config --system core.autocrlf false
           git config --system core.eol lf
       - uses: actions/checkout@v2
