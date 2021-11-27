@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertThrows, sinon } from "./dev_deps.ts";
-import { act, runCommand } from "./act.ts";
+import { act, funcs, runCommand } from "./act.ts";
 import { defaults } from "./settings.ts";
 
 Deno.test("runCommand()", async (test) => {
@@ -36,9 +36,9 @@ interface TestOptions {
 Deno.test("act()", async (context) => {
   defaults.name = "test_directory_act";
 
-  const fileSpy = sinon.spy(defaults, "addModuleFile");
+  const fileSpy = sinon.spy(funcs, "addModuleFile");
 
-  const gitSpy = sinon.spy(defaults, "initGit");
+  const gitSpy = sinon.spy(funcs, "initGit");
 
   const beforeEach = () => {
     Deno.mkdirSync(defaults.name, { recursive: true });
