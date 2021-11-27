@@ -1,5 +1,3 @@
-import { addModuleFile, initGit } from "./act.ts";
-import { WriteFileSecOptions } from "./utils.ts";
 import { YAML } from "./deps.ts";
 
 export interface FileContentSettings {
@@ -22,15 +20,6 @@ export interface FlagSettings {
   ci: boolean;
 }
 
-export interface InsertableTestSpies {
-  initGit: (name: string) => Promise<void>;
-  addModuleFile: (
-    filename: string,
-    content: Uint8Array,
-    options?: WriteFileSecOptions,
-  ) => Promise<void>;
-}
-
 export interface FileNameSettings {
   depsEntrypoint: string;
   devDepsEntrypoint: string;
@@ -39,11 +28,7 @@ export interface FileNameSettings {
 }
 
 export interface Settings
-  extends
-    FlagSettings,
-    FileContentSettings,
-    FileNameSettings,
-    InsertableTestSpies {
+  extends FlagSettings, FileContentSettings, FileNameSettings {
   extension: string;
   name: string;
 }
@@ -83,8 +68,6 @@ target/`,
 `,
   ),
   tdd: false,
-  initGit: initGit,
-  addModuleFile: addModuleFile,
   js: false,
   ci: false,
 };

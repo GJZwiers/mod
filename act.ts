@@ -9,6 +9,26 @@ import {
 import { asciiDeno } from "./ascii.ts";
 import { log } from "./dev_deps.ts";
 
+async function addModuleFile(
+  filename: string,
+  content: Uint8Array,
+  options?: WriteFileSecOptions,
+) {
+  await writeFileSec(filename, content, options);
+}
+
+async function initGit(path: string) {
+  try {
+    await runCommand(Deno.run({
+      cmd: ["git", "init", path],
+    }));
+  } catch (error) {
+    log.warning(
+      "Could not initialize Git repository. Error:" + error,
+    );
+  }
+}
+
 export async function act(settings: Settings) {
   const path = settings.name;
   if (path !== ".") {
@@ -16,7 +36,7 @@ export async function act(settings: Settings) {
   }
 
   if (settings.configOnly) {
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${path}/deno.json`,
       settings.configContent,
       { force: settings.force },
@@ -28,7 +48,7 @@ export async function act(settings: Settings) {
   if (settings.js) settings.extension = "js";
 
   if (settings.config) {
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${path}/deno.json`,
       settings.configContent,
       { force: settings.force },
@@ -36,20 +56,20 @@ export async function act(settings: Settings) {
   }
 
   if (settings.importMap) {
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${path}/import_map.json`,
       settings.mapContent,
       { force: settings.force },
     );
   }
 
-  await settings.addModuleFile(
+  await funcs.addModuleFile(
     `${path}/${settings.entrypoint}.${settings.extension}`,
     defaultModuleContent,
     { force: settings.force },
   );
 
-  await settings.addModuleFile(
+  await funcs.addModuleFile(
     `${path}/${settings.depsEntrypoint}.${settings.extension}`,
     defaultModuleContent,
     { force: settings.force },
@@ -65,19 +85,19 @@ export async function act(settings: Settings) {
         ),
     );
 
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${path}/${settings.entrypoint}.test.${settings.extension}`,
       testModBytes,
       { force: settings.force },
     );
 
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
       defaultTestImportContent,
       { force: settings.force },
     );
   } else {
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
       defaultModuleContent,
       { force: settings.force },
@@ -88,17 +108,17 @@ export async function act(settings: Settings) {
     const actionsPath = `${path}/.github/workflows`;
     await Deno.mkdir(actionsPath, { recursive: true });
 
-    await settings.addModuleFile(
+    await funcs.addModuleFile(
       `${actionsPath}/build.yaml`,
       actions,
     );
   }
 
   if (settings.git) {
-    await settings.initGit(path);
+    await funcs.initGit(path);
   }
 
-  await settings.addModuleFile(
+  await funcs.addModuleFile(
     `${path}/${settings.gitignore}`,
     settings.gitignoreContent,
     { force: settings.force },
@@ -106,26 +126,6 @@ export async function act(settings: Settings) {
 
   if (settings.ascii) {
     drawDeno();
-  }
-}
-
-export async function addModuleFile(
-  filename: string,
-  content: Uint8Array,
-  options?: WriteFileSecOptions,
-) {
-  await writeFileSec(filename, content, options);
-}
-
-export async function initGit(path: string) {
-  try {
-    await runCommand(Deno.run({
-      cmd: ["git", "init", path],
-    }));
-  } catch (error) {
-    log.warning(
-      "Could not initialize Git repository. Error:" + error,
-    );
   }
 }
 
@@ -151,3 +151,8 @@ export function drawDeno() {
     }, 250 + i);
   }
 }
+
+export const funcs = {
+  addModuleFile,
+  initGit,
+};
