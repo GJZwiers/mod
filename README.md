@@ -19,7 +19,7 @@ deno run \
 --allow-read=./my_deno_project \
 --allow-run=git \
 --allow-write=./my_deno_project \
-https://deno.land/x/mod@v2.2.3/mod.ts \
+https://deno.land/x/mod@v2.2.4/mod.ts \
 --name my_deno_project
 ```
 
@@ -35,7 +35,7 @@ deno run `
 --allow-read=./my_deno_project `
 --allow-run=git `
 --allow-write=./my_deno_project `
-https://deno.land/x/mod@v2.2.3/mod.ts `
+https://deno.land/x/mod@v2.2.4/mod.ts `
 --name my_deno_project
 ```
 
@@ -55,7 +55,7 @@ https://deno.land/x/mod@v2.2.3/mod.ts `
 Install the latest stable release from `deno.land` (or `nest.land`):
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.2.3/mod.ts
+deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.2.4/mod.ts
 ```
 
 Or install the latest unstable (unreleased) version from `GitHub`:
@@ -139,7 +139,7 @@ mod -n my_deno_project --ci
 `mod` can create other files with the module, such as an import map or a deno
 configuration file. To see what options and flags are available use `mod --help`
 if you have the CLI installed or
-`deno run https://deno.land/x/mod@v2.2.3/mod.ts --help`
+`deno run https://deno.land/x/mod@v2.2.4/mod.ts --help`
 
 ## Contributing
 
