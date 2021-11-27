@@ -36,7 +36,7 @@ interface TestOptions {
 Deno.test("act()", async (context) => {
   defaults.name = "test_directory_act";
 
-  const fileSpy = sinon.spy(defaults, "addProjectFile");
+  const fileSpy = sinon.spy(defaults, "addModuleFile");
 
   const gitSpy = sinon.spy(defaults, "initGit");
 

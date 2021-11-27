@@ -6,7 +6,7 @@ import { ask } from "./ask.ts";
 await new Command()
   .name("mod")
   .version("v2.2.5")
-  .description("Start a new Deno project with a single command")
+  .description("Start a new Deno module with a single command")
   .option(
     "--js [js:boolean]",
     "Use JavaScript instead of TypeScript for the module",
@@ -16,7 +16,7 @@ await new Command()
   )
   .option(
     "-n, --name [name:string]",
-    "Create the project in a new directory with the entered name.",
+    "Create the module in a new directory with the entered name.",
   )
   .option(
     "-p, --prompt [prompt:boolean]",
@@ -34,14 +34,14 @@ await new Command()
   )
   .option(
     "-t, --tdd [tdd:boolean]",
-    "Create the project with a file for tests. Note: std/testing won't be cached automatically.",
+    "Create the module with a file for tests. Note: std/testing won't be cached automatically.",
     {
       default: false,
     },
   )
   .option(
     "-c, --config [config:boolean]",
-    "Add a deno.json configuration file as part of the project.",
+    "Add a deno.json configuration file as part of the module.",
     {
       default: false,
     },
@@ -55,7 +55,7 @@ await new Command()
   )
   .option(
     "-m, --import-map [importMap:boolean]",
-    "Add an import map as part of the project.",
+    "Add an import map as part of the module.",
     {
       default: false,
     },
@@ -66,7 +66,7 @@ await new Command()
   )
   .option(
     "--no-git [git:boolean]",
-    "Don't initialize a local Git repository for the project.",
+    "Don't initialize a local Git repository for the module.",
   )
   .option(
     "-a, --ascii [ascii:boolean]",
@@ -98,7 +98,7 @@ await new Command()
     colors: false,
   })
   .example(
-    "Start a test-driven project",
+    "Start a test-driven module",
     "mod --tdd",
   )
   .example(
