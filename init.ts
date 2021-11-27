@@ -76,6 +76,16 @@ await new Command()
     },
   )
   .action((options) => {
+    if (
+      options.configOnly &&
+      (options.ci || options.config || options.importMap || options.js ||
+        options.prompt || options.tdd)
+    ) {
+      throw new Error(
+        "Cannot use config-only flag in combination with other options other than --name.",
+      );
+    }
+
     if (options.prompt) {
       const choices = ask(options);
       act({ ...defaults, ...choices });

@@ -9,22 +9,30 @@ import {
 import { asciiDeno } from "./ascii.ts";
 import { log } from "./dev_deps.ts";
 
-export async function addProjectFile(
-  filename: string,
-  content: Uint8Array,
-  options?: WriteFileSecOptions,
-) {
-  await writeFileSec(filename, content, options);
-}
-
 export async function act(settings: Settings) {
   const path = settings.name;
   if (path !== ".") {
     await Deno.mkdir(path, { recursive: true });
   }
 
-  if (settings.js) {
-    settings.extension = "js";
+  if (settings.configOnly) {
+    await settings.addProjectFile(
+      `${path}/deno.json`,
+      settings.configContent,
+      { force: settings.force },
+    );
+    if (settings.ascii) drawDeno();
+    return;
+  }
+
+  if (settings.js) settings.extension = "js";
+
+  if (settings.config) {
+    await settings.addProjectFile(
+      `${path}/deno.json`,
+      settings.configContent,
+      { force: settings.force },
+    );
   }
 
   if (settings.importMap) {
@@ -35,85 +43,78 @@ export async function act(settings: Settings) {
     );
   }
 
-  if (settings.config || settings.configOnly) {
+  await settings.addProjectFile(
+    `${path}/${settings.entrypoint}.${settings.extension}`,
+    defaultModuleContent,
+    { force: settings.force },
+  );
+
+  await settings.addProjectFile(
+    `${path}/${settings.depsEntrypoint}.${settings.extension}`,
+    defaultModuleContent,
+    { force: settings.force },
+  );
+
+  if (settings.tdd) {
+    const testModBytes = new TextEncoder().encode(
+      new TextDecoder()
+        .decode(defaultTestModuleContent)
+        .replace(
+          /\{\{extension\}\}/,
+          settings.extension,
+        ),
+    );
+
     await settings.addProjectFile(
-      `${path}/deno.json`,
-      settings.configContent,
+      `${path}/${settings.entrypoint}.test.${settings.extension}`,
+      testModBytes,
+      { force: settings.force },
+    );
+
+    await settings.addProjectFile(
+      `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
+      defaultTestImportContent,
+      { force: settings.force },
+    );
+  } else {
+    await settings.addProjectFile(
+      `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
+      defaultModuleContent,
       { force: settings.force },
     );
   }
 
-  if (!settings.configOnly) {
-    await settings.addProjectFile(
-      `${path}/${settings.entrypoint}.${settings.extension}`,
-      defaultModuleContent,
-      { force: settings.force },
-    );
+  if (settings.ci) {
+    const actionsPath = `${path}/.github/workflows`;
+    await Deno.mkdir(actionsPath, { recursive: true });
 
     await settings.addProjectFile(
-      `${path}/${settings.depsEntrypoint}.${settings.extension}`,
-      defaultModuleContent,
-      { force: settings.force },
+      `${actionsPath}/build.yaml`,
+      actions,
     );
-
-    if (settings.tdd) {
-      const testModString = new TextDecoder().decode(defaultTestModuleContent);
-      const replaced = testModString.replace(
-        /\{\{extension\}\}/,
-        settings.extension,
-      );
-      const testModBytes = new TextEncoder().encode(replaced);
-
-      await settings.addProjectFile(
-        `${path}/${settings.entrypoint}.test.${settings.extension}`,
-        testModBytes,
-        { force: settings.force },
-      );
-
-      await settings.addProjectFile(
-        `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
-        defaultTestImportContent,
-        { force: settings.force },
-      );
-    } else {
-      await settings.addProjectFile(
-        `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
-        defaultModuleContent,
-        { force: settings.force },
-      );
-    }
-
-    if (settings.ci) {
-      const actionsPath = `${path}/.github/workflows`;
-      await Deno.mkdir(actionsPath, { recursive: true });
-
-      await settings.addProjectFile(
-        `${actionsPath}/build.yaml`,
-        actions,
-      );
-    }
-
-    if (settings.git) {
-      await settings.initGit(path);
-    }
-
-    await settings.addProjectFile(
-      `${path}/${settings.gitignore}`,
-      settings.gitignoreContent,
-      { force: settings.force },
-    );
-
-    if (settings.ascii) {
-      const lines = asciiDeno.split(/\n/);
-      let i = 0;
-      for (const line of lines) {
-        i += 50;
-        setTimeout(() => {
-          console.log(line);
-        }, 250 + i);
-      }
-    }
   }
+
+  if (settings.git) {
+    await settings.initGit(path);
+  }
+
+  await settings.addProjectFile(
+    `${path}/${settings.gitignore}`,
+    settings.gitignoreContent,
+    { force: settings.force },
+  );
+
+  if (settings.ascii) {
+    drawDeno();
+  }
+}
+
+export async function addProjectFile(
+  filename: string,
+  content: Uint8Array,
+  options?: WriteFileSecOptions,
+) {
+  await writeFileSec(filename, content, options);
 }
 
 export async function initGit(path: string) {
@@ -138,4 +139,15 @@ export async function runCommand(
   cmd.close();
 
   return (status.code === 0) ? true : false;
+}
+
+export function drawDeno() {
+  const lines = asciiDeno.split(/\n/);
+  let i = 0;
+  for (const line of lines) {
+    i += 50;
+    setTimeout(() => {
+      console.log(line);
+    }, 250 + i);
+  }
 }
