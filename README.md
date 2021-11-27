@@ -134,6 +134,20 @@ mod -n my_deno_module --ci
 |   ├── mod.ts
 ```
 
+You can also initialize with JavaScript:
+
+```console
+mod --js
+```
+
+```
+.
+├── .gitignore
+├── deps.js
+├── dev_deps.js
+├── mod.js
+```
+
 ## Options
 
 `mod` can create other files with the module, such as an import map or a deno
