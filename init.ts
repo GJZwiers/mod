@@ -27,7 +27,7 @@ await new Command()
   )
   .option(
     "--ci [ci:boolean]",
-    "Add a GitHub Actions CI workflow for the module.",
+    "Add a GitHub Actions CI workflow to the module.",
     {
       default: false,
     },

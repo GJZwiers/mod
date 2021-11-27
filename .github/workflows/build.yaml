@@ -19,22 +19,12 @@ jobs:
       - uses: denoland/setup-deno@v1.1.0
         with:
           deno-version: v1.x.x
-          
-      - name: Check format
-        run: deno fmt --check
+      - run: deno fmt --check
+      - run: deno lint
+      - run: deno test -A --coverage=cov --unstable
+      - run: deno coverage --lcov cov > cov.lcov
 
-      - name: Check code issues
-        run: deno lint
-
-      - name: Run tests and collect code coverage
-        run: deno test -A --coverage=cov --unstable
-
-      - name: Generate coverage report
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: deno coverage --lcov cov > cov.lcov
-
-      - name: Upload coverage report
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
