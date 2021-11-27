@@ -112,7 +112,7 @@ export const actions = encoder.encode(YAML.stringify({
       "runs-on": "${{ matrix.os }}",
       strategy: {
         matrix: {
-          os: ["ubuntu-latest"],
+          os: ["ubuntu-20.04"],
         },
       },
       steps: [
