@@ -1,20 +1,19 @@
 name: publish egg
 
 on:
-  release:
-    types:
-      - published
+  create:
+    ref_type: 'tag'
 
 jobs:
   publish:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: denolib/setup-deno@v2
+      - uses: denoland/setup-deno@v1.1.0
         with:
-          deno-version: v1.5.x   
+          deno-version: v1.13.x
       - name: Release
         run: |
-          deno install -Af --unstable https://x.nest.land/eggs@0.3.8/eggs.ts
+          deno install -Af --unstable https://x.nest.land/eggs@0.3.10/eggs.ts
           eggs link ${{ secrets.NESTAPIKEY }}
           eggs publish --yes --no-check --version $(git describe --tags $(git rev-list --tags --max-count=1))
