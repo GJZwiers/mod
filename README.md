@@ -16,11 +16,11 @@ Try it without installing anything:
 
 ```bash
 deno run \
---allow-read=./my_deno_project \
+--allow-read=./my_deno_module \
 --allow-run=git \
---allow-write=./my_deno_project \
+--allow-write=./my_deno_module \
 https://deno.land/x/mod@v2.2.5/mod.ts \
---name my_deno_project
+--name my_deno_module
 ```
 
 </p>
@@ -32,11 +32,11 @@ https://deno.land/x/mod@v2.2.5/mod.ts \
 
 ```console
 deno run `
---allow-read=./my_deno_project `
+--allow-read=./my_deno_module `
 --allow-run=git `
---allow-write=./my_deno_project `
+--allow-write=./my_deno_module `
 https://deno.land/x/mod@v2.2.5/mod.ts `
---name my_deno_project
+--name my_deno_module
 ```
 
 </p>
@@ -72,7 +72,7 @@ To upgrade, run the command with a new version number and include `-f`.
 
 - `read`: to check if files already exists before writing.
 - `run=git`: to run `git` commands, more specifically `git init`
-- `write`: to make files as part of the project initialization.
+- `write`: to make files as part of the module initialization.
 
 ## Usage
 
@@ -102,14 +102,14 @@ If `git` is installed on the machine then `git init` will be run as well.
 To create the new module in a new directory:
 
 ```console
-mod --name my_deno_project
+mod --name my_deno_module
 ```
 
 This will create the following file and directory structure:
 
 ```
 .
-├── my_deno_project
+├── my_deno_module
 |   ├── .gitignore
 |   ├── deps.ts
 |   ├── dev_deps.ts
@@ -119,12 +119,12 @@ This will create the following file and directory structure:
 `mod` can also create other files along with the basics, such as a pipeline:
 
 ```console
-mod -n my_deno_project --ci
+mod -n my_deno_module --ci
 ```
 
 ```
 .
-├── my_deno_project
+├── my_deno_module
 |   ├── .github
 |   |   ├── workflows
 |   |   |   ├── build.yaml

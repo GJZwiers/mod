@@ -1,4 +1,4 @@
-import { addProjectFile, initGit } from "./act.ts";
+import { addModuleFile, initGit } from "./act.ts";
 import { WriteFileSecOptions } from "./utils.ts";
 import { YAML } from "./deps.ts";
 
@@ -24,7 +24,7 @@ export interface FlagSettings {
 
 export interface InsertableTestSpies {
   initGit: (name: string) => Promise<void>;
-  addProjectFile: (
+  addModuleFile: (
     filename: string,
     content: Uint8Array,
     options?: WriteFileSecOptions,
@@ -84,7 +84,7 @@ target/`,
   ),
   tdd: false,
   initGit: initGit,
-  addProjectFile: addProjectFile,
+  addModuleFile: addModuleFile,
   js: false,
   ci: false,
 };

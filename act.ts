@@ -16,7 +16,7 @@ export async function act(settings: Settings) {
   }
 
   if (settings.configOnly) {
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${path}/deno.json`,
       settings.configContent,
       { force: settings.force },
@@ -28,7 +28,7 @@ export async function act(settings: Settings) {
   if (settings.js) settings.extension = "js";
 
   if (settings.config) {
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${path}/deno.json`,
       settings.configContent,
       { force: settings.force },
@@ -36,20 +36,20 @@ export async function act(settings: Settings) {
   }
 
   if (settings.importMap) {
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${path}/import_map.json`,
       settings.mapContent,
       { force: settings.force },
     );
   }
 
-  await settings.addProjectFile(
+  await settings.addModuleFile(
     `${path}/${settings.entrypoint}.${settings.extension}`,
     defaultModuleContent,
     { force: settings.force },
   );
 
-  await settings.addProjectFile(
+  await settings.addModuleFile(
     `${path}/${settings.depsEntrypoint}.${settings.extension}`,
     defaultModuleContent,
     { force: settings.force },
@@ -65,19 +65,19 @@ export async function act(settings: Settings) {
         ),
     );
 
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${path}/${settings.entrypoint}.test.${settings.extension}`,
       testModBytes,
       { force: settings.force },
     );
 
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
       defaultTestImportContent,
       { force: settings.force },
     );
   } else {
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${path}/${settings.devDepsEntrypoint}.${settings.extension}`,
       defaultModuleContent,
       { force: settings.force },
@@ -88,7 +88,7 @@ export async function act(settings: Settings) {
     const actionsPath = `${path}/.github/workflows`;
     await Deno.mkdir(actionsPath, { recursive: true });
 
-    await settings.addProjectFile(
+    await settings.addModuleFile(
       `${actionsPath}/build.yaml`,
       actions,
     );
@@ -98,7 +98,7 @@ export async function act(settings: Settings) {
     await settings.initGit(path);
   }
 
-  await settings.addProjectFile(
+  await settings.addModuleFile(
     `${path}/${settings.gitignore}`,
     settings.gitignoreContent,
     { force: settings.force },
@@ -109,7 +109,7 @@ export async function act(settings: Settings) {
   }
 }
 
-export async function addProjectFile(
+export async function addModuleFile(
   filename: string,
   content: Uint8Array,
   options?: WriteFileSecOptions,
