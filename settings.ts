@@ -18,6 +18,7 @@ export interface FlagSettings {
   tdd: boolean;
   js: boolean;
   ci: boolean;
+  prompt: boolean;
 }
 
 export interface FileNameSettings {
@@ -70,6 +71,7 @@ target/`,
   tdd: false,
   js: false,
   ci: false,
+  prompt: false,
 };
 
 export const defaultTestModuleContent = encoder.encode(
