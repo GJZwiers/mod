@@ -192,40 +192,40 @@ Deno.test("act()", async (context) => {
     },
   });
 
-  await test({
-    name:
-      "throw error if config-only flag is used with another setting, except name",
-    fn: async () => {
-      const cmd = await runCommand(Deno.run({
-        cmd: [
-          "deno",
-          "run",
-          "-A",
-          "--",
-          "mod.ts",
-          "--config-only",
-          "--import-map",
-        ],
-      }));
+  // await test({
+  //   name:
+  //     "throw error if config-only flag is used with another setting, except name",
+  //   fn: async () => {
+  //     const cmd = await runCommand(Deno.run({
+  //       cmd: [
+  //         "deno",
+  //         "run",
+  //         "-A",
+  //         "--",
+  //         "mod.ts",
+  //         "--config-only",
+  //         "--import-map",
+  //       ],
+  //     }));
 
-      assertEquals(cmd, false);
+  //     assertEquals(cmd, false);
 
-      const cmd2 = await runCommand(Deno.run({
-        cmd: [
-          "deno",
-          "run",
-          "-A",
-          "--",
-          "mod.ts",
-          "--config-only",
-          "--name",
-          defaults.name,
-        ],
-      }));
+  //     const cmd2 = await runCommand(Deno.run({
+  //       cmd: [
+  //         "deno",
+  //         "run",
+  //         "-A",
+  //         "--",
+  //         "mod.ts",
+  //         "--config-only",
+  //         "--name",
+  //         defaults.name,
+  //       ],
+  //     }));
 
-      assertEquals(cmd2, true);
-    },
-  });
+  //     assertEquals(cmd2, true);
+  //   },
+  // });
 
   await test({
     name: "create workflow file if settings.ci is true",
