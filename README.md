@@ -150,7 +150,7 @@ mod --js
 
 ## Options
 
-`mod` can create other files with the module, such as an import map or a deno
+`mod` can create other files with the module, such as an import map or a Deno
 configuration file. To see what options and flags are available use `mod --help`
 if you have the CLI installed or
 `deno run https://deno.land/x/mod@v2.2.5/mod.ts --help`
