@@ -21,7 +21,7 @@ await new Command()
   )
   .option(
     "-p, --prompt [prompt:boolean]",
-    "Answer a series of prompts in order to set up the module.",
+    "Create the module through a series of prompts. This is useful if you want to override defaults, such as choose 'main.ts' instead of 'mod.ts' as the entrypoint.",
     {
       default: false,
     },
@@ -35,28 +35,28 @@ await new Command()
   )
   .option(
     "-t, --tdd [tdd:boolean]",
-    "Create the module with a file for tests. Note: std/testing won't be cached automatically.",
+    "Add a .test file to the module. Note: std/testing won't be cached automatically.",
     {
       default: false,
     },
   )
   .option(
     "-c, --config [config:boolean]",
-    "Add a deno.json configuration file as part of the module.",
+    "Add a deno.json configuration file to the module.",
     {
       default: false,
     },
   )
   .option(
     "-o, --config-only [configOnly:boolean]",
-    "Only make a deno.json configuration file.",
+    "Only add a deno.json configuration file and no other files to the module.",
     {
       default: false,
     },
   )
   .option(
     "-m, --import-map [importMap:boolean]",
-    "Add an import map as part of the module.",
+    "Add an import_map.json to the module.",
     {
       default: false,
     },

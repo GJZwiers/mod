@@ -19,7 +19,7 @@ deno run \
 --allow-read=./my_deno_module \
 --allow-run=git \
 --allow-write=./my_deno_module \
-https://deno.land/x/mod@v2.2.6/mod.ts \
+https://deno.land/x/mod/mod.ts \
 --name my_deno_module
 ```
 
@@ -35,7 +35,7 @@ deno run `
 --allow-read=./my_deno_module `
 --allow-run=git `
 --allow-write=./my_deno_module `
-https://deno.land/x/mod@v2.2.6/mod.ts `
+https://deno.land/x/mod/mod.ts `
 --name my_deno_module
 ```
 
@@ -52,23 +52,25 @@ https://deno.land/x/mod@v2.2.6/mod.ts `
 
 ## Installation
 
-Install the latest stable release from `deno.land` (or `nest.land`):
+You can get the latest stable release from `deno.land/x`:
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -n mod https://deno.land/x/mod@v2.2.6/mod.ts
+deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod/mod.ts
 ```
 
-Or install the latest unstable (unreleased) version from `GitHub`:
+If you want to install a particular version use e.g. `mod@v2.2.6/mod.ts` in the
+URL.
+
+You can also get the _unstable_ canary release from `GitHub` by installing via
+the `main` branch's raw URL:
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -n mod https://raw.githubusercontent.com/GJZwiers/mod/main/mod.ts
+deno install --allow-read --allow-run=git --allow-write -fn mod https://raw.githubusercontent.com/GJZwiers/mod/main/mod.ts
 ```
-
-To upgrade, run the command with a new version number and include `-f`.
 
 ## Permissions
 
-`mod` requires the following permissions
+`mod` requires the following permissions:
 
 - `read`: to check if files already exists before writing.
 - `run=git`: to run `git` commands, more specifically `git init`
@@ -116,7 +118,8 @@ This will create the following file and directory structure:
 |   ├── mod.ts
 ```
 
-`mod` can also create other files along with the basics, such as a pipeline:
+`mod` can also create other files in addition to the basics, such as a workflow
+file for GitHub Actions:
 
 ```console
 mod -n my_deno_module --ci
@@ -151,10 +154,13 @@ mod --js
 ## Options
 
 `mod` can create other files with the module, such as an import map or a Deno
-configuration file. To see what options and flags are available use `mod --help`
-if you have the CLI installed or
-`deno run https://deno.land/x/mod@v2.2.6/mod.ts --help`
+configuration file. To see what options and flags are available use:
+
+- `mod --help` if you have the CLI installed or
+- `deno run https://deno.land/x/mod/mod.ts --help`
 
 ## Contributing
 
-Bug reports and feature requests are very welcome!
+Bug reports and feature requests are very welcome! If you want to contribute a
+fix or feature yourself, fork this repository and make a pull request with your
+changes.
