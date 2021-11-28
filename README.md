@@ -58,11 +58,11 @@ You can get the latest stable release from `deno.land/x`:
 deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod/mod.ts
 ```
 
-If you want to install a particular version use e.g. `mod@v2.2.6/mod.ts` in the
-URL.
+If you want to install a particular version use, for example,
+`https://deno.land/x/mod@v2.2.6/mod.ts`.
 
-You can also get the _unstable_ canary release from `GitHub` by installing via
-the `main` branch's raw URL:
+You can also get the _unstable_ canary release from GitHub by installing via the
+`main` branch's raw URL:
 
 ```console
 deno install --allow-read --allow-run=git --allow-write -fn mod https://raw.githubusercontent.com/GJZwiers/mod/main/mod.ts
