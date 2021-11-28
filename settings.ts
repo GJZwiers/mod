@@ -102,26 +102,21 @@ export const actions = encoder.encode(YAML.stringify({
       },
       steps: [
         {
-          name: "Set up Actions",
           uses: "actions/checkout@v2",
         },
         {
-          name: "Set up Deno",
           uses: "denoland/setup-deno@v1.1.0",
           with: {
             "deno-version": "v1.x.x",
           },
         },
         {
-          name: "Check format",
           run: "deno fmt --check",
         },
         {
-          name: "Check code issues",
           run: "deno lint",
         },
         {
-          name: "Run tests and collect code coverage",
           run: "deno test -A --coverage=cov",
         },
       ],
