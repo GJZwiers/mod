@@ -16,9 +16,9 @@ Try it without installing anything:
 
 ```bash
 deno run \
---allow-read=./my_deno_module \
+--allow-read=my_deno_module \
 --allow-run=git \
---allow-write=./my_deno_module \
+--allow-write=my_deno_module \
 https://deno.land/x/mod/mod.ts \
 --name my_deno_module
 ```
@@ -32,9 +32,9 @@ https://deno.land/x/mod/mod.ts \
 
 ```console
 deno run `
---allow-read=./my_deno_module `
+--allow-read=my_deno_module `
 --allow-run=git `
---allow-write=./my_deno_module `
+--allow-write=my_deno_module `
 https://deno.land/x/mod/mod.ts `
 --name my_deno_module
 ```
