@@ -76,6 +76,9 @@ deno install --allow-read --allow-run=git --allow-write -fn mod https://raw.gith
 - `run=git`: to run `git` commands, more specifically `git init`
 - `write`: to make files as part of the module initialization.
 
+Omitting `run` permissions is possible, but it means a Git repository will not
+be initialized automatically.
+
 ## Usage
 
 ```console
