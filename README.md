@@ -1,5 +1,9 @@
 # mod
 
+<p align="center">
+<img src=".github/excited_deno.png" width="350">
+</p>
+
 [![Build](https://github.com/GJZwiers/mod/actions/workflows/build.yaml/badge.svg)](https://github.com/GJZwiers/mod/actions/workflows/build.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/GJZwiers/mod/badge.svg?branch=main)](https://coveralls.io/github/GJZwiers/mod?branch=main)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/mod)
