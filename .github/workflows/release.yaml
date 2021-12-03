@@ -1,9 +1,6 @@
 name: publish egg
 
-on:
-  push:
-  release:
-    types: [published]
+on: workflow_dispatch
 
 jobs:
   publish:
