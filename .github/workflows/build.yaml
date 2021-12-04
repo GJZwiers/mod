@@ -36,7 +36,7 @@ jobs:
         if: matrix.os == 'ubuntu-20.04'
         uses: actions/cache@v2
         with:
-          path: deno_cache
+          path: depcache
           key: ${{ runner.os }}-deno-caching-key
 
       - name: test
