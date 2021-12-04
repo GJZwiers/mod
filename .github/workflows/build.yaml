@@ -5,10 +5,17 @@ on: push
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
-        # deno-version: [vx.x.x, canary]
+        deno-version: [ v1.16.x ]
+        experimental: [ false ]
+        include:
+          - deno-version: canary
+            os: ubuntu-20.04
+            experimental: true
+          
     steps:
       - name: Configure line-endings for Windows builds
         if: ${{ matrix.os == 'windows-2019' }}
@@ -18,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: denoland/setup-deno@v1.1.0
         with:
-          deno-version: v1.x.x
+          deno-version: ${{ matrix.deno-version }}
       - run: deno fmt --check
       - run: deno lint
       - run: deno test -A --coverage=cov --unstable
