@@ -28,6 +28,7 @@ jobs:
           deno-version: ${{ matrix.deno-version }}
 
       - name: Set Deno cache directory
+        if: matrix.os == 'ubuntu-20.04'
         run: DENO_DIR=deno_cache
 
       - run: deno fmt --check
@@ -35,10 +36,11 @@ jobs:
       - run: deno test -A --coverage=cov --unstable
 
       - name: Cache DENO_DIR
+        if: matrix.os == 'ubuntu-20.04'
         uses: actions/cache@v2
         with:
           path: deno_cache
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-denocache
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
