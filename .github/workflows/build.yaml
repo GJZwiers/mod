@@ -38,10 +38,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: deno_cache
-          key: ${{ runner.os }}-deno3
+          key: ${{ runner.os }}-deno
 
-     # - run: deno fmt --check
-     # - run: deno lint
+      - run: deno fmt --check --ignore $DENO_DIR
+      - run: deno lint
       # - run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
       - name: test
         run: |
