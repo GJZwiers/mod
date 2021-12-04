@@ -33,7 +33,6 @@ jobs:
       - run: deno lint
 
       - name: Cache DENO_DIR
-        if: matrix.os == 'ubuntu-20.04'
         uses: actions/cache@v2
         with:
           path: depcache
