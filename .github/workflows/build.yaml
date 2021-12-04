@@ -27,9 +27,9 @@ jobs:
         with:
           deno-version: ${{ matrix.deno-version }}
 
-      - name: Set Deno cache directory
-        if: matrix.os == 'ubuntu-20.04'
-        run: export DENO_DIR=deno_cache
+      # - name: Set Deno cache directory
+      #   if: matrix.os == 'ubuntu-20.04'
+      #   run: export 
 
       - name: Cache DENO_DIR
         if: matrix.os == 'ubuntu-20.04'
@@ -41,7 +41,9 @@ jobs:
       - run: deno fmt --check
       - run: deno lint
       #- run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
-      - run: deno test -A --coverage=cov --unstable
+      - run: |
+          DENO_DIR=deno_cache
+          deno test -A --coverage=cov --unstable
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
