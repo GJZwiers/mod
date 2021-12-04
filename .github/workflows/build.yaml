@@ -41,9 +41,6 @@ jobs:
 
       - name: test
         run: |
-          deno info
-          DENO_DIR=deno_cache
-          deno info
           deno test -A --coverage=cov --unstable
 
       - if: matrix.os == 'ubuntu-20.04'
