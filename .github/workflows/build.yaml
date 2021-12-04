@@ -36,12 +36,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: deno_cache
-          key: ${{ runner.os }}-deno
+          key: ${{ runner.os }}-deno2
 
       - run: deno fmt --check
       - run: deno lint
-      #- run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
-      - run: |
+      # - run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
+      - name: test
+        run: |
           DENO_DIR=deno_cache
           deno test -A --coverage=cov --unstable
 
