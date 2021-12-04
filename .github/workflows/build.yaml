@@ -40,12 +40,14 @@ jobs:
           path: deno_cache
           key: ${{ runner.os }}-deno3
 
-      - run: deno fmt --check
-      - run: deno lint
+     # - run: deno fmt --check
+     # - run: deno lint
       # - run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
       - name: test
         run: |
+          deno info
           DENO_DIR=deno_cache
+          deno info
           deno test -A --coverage=cov --unstable
 
       - if: matrix.os == 'ubuntu-20.04'
