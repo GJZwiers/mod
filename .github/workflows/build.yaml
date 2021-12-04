@@ -26,9 +26,19 @@ jobs:
       - uses: denoland/setup-deno@v1.1.0
         with:
           deno-version: ${{ matrix.deno-version }}
+
+      - name: Set Deno cache directory
+        run: DENO_DIR=deno_cache
+
       - run: deno fmt --check
       - run: deno lint
       - run: deno test -A --coverage=cov --unstable
+
+      - name: Cache DENO_DIR
+        uses: actions/cache@v2
+        with:
+          path: deno_cache
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
