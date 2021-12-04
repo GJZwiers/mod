@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: deno_cache
-          key: ${{ runner.os }}-deno
+          key: ${{ runner.os }}-deno-caching-key
 
       - name: test
         run: |
