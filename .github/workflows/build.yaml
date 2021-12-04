@@ -40,8 +40,8 @@ jobs:
 
       - run: deno fmt --check
       - run: deno lint
-      - run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
-      # - run: deno test -A --coverage=cov --unstable --cached-only
+      #- run: deno run https://deno.land/std@0.117.0/examples/welcome.ts
+      - run: deno test -A --coverage=cov --unstable --cached-only
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
