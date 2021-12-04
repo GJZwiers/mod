@@ -15,6 +15,8 @@ jobs:
           - deno-version: canary
             os: ubuntu-18.04
             experimental: true
+    env:
+      DENO_DIR: depcache
           
     steps:
       - name: Configure line-endings for Windows builds
@@ -36,7 +38,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: deno_cache
-          key: ${{ runner.os }}-deno2
+          key: ${{ runner.os }}-deno3
 
       - run: deno fmt --check
       - run: deno lint
