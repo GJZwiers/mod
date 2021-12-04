@@ -40,7 +40,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: deno_cache
-          key: ${{ runner.os }}-denocache
+          # key: ${{ runner.os }}-denocache
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
