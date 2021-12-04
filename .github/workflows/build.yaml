@@ -5,10 +5,16 @@ on: push
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
-        deno-version: [v1.16.x, canary]
+        deno-version: [ v1.16.x ]
+        include:
+          - deno-version: canary
+            os: ubuntu-20.04
+            experimental: true
+          
     steps:
       - name: Configure line-endings for Windows builds
         if: ${{ matrix.os == 'windows-2019' }}
