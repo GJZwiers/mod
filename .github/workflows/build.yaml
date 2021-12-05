@@ -17,13 +17,14 @@ jobs:
             experimental: true
     env:
       DENO_DIR: depcache
-          
+
     steps:
       - name: Configure line-endings for Windows builds
         if: matrix.os == 'windows-2019'
         run: |
           git config --system core.autocrlf false
           git config --system core.eol lf
+
       - uses: actions/checkout@v2
       - uses: denoland/setup-deno@v1.1.0
         with:
@@ -36,11 +37,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: depcache
-          key: ${{ runner.os }}-deno-caching-key
+          key: ${{ runner.os }}-hashFiles('lock.json')
 
-      - name: test
-        run: |
-          deno test -A --coverage=cov --unstable
+      - run: deno test -A --coverage=cov --unstable
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
@@ -50,4 +49,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: cov.lcov
-          
