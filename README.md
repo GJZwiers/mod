@@ -9,10 +9,11 @@
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/mod)
 ![GitHub](https://img.shields.io/github/license/GJZwiers/mod)
 
-`mod` is a command line tool to quickly scaffold a new Deno module. It requires
-`deno` and optionally `git`.
+`mod` is a command line tool to quickly scaffold a new Deno module. It creates
+app and dependency entrypoints, a `.gitignore` file and has options to add a
+test-driven setup and/or include a basic CI pipeline.
 
-Try it without installing anything:
+Try it without any installation:
 
 <details open>
 <summary>Bash/Zsh</summary>
@@ -56,7 +57,8 @@ https://deno.land/x/mod/mod.ts `
 
 ## Installation
 
-You can get the latest stable release from `deno.land/x`:
+`mod` requires `deno` and optionally `git`. You can get the latest stable
+release from `deno.land/x`:
 
 ```console
 deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod/mod.ts
