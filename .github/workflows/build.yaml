@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
-        deno-version: [ v1.16.x ]
+        deno-version: [ v1.x ]
         experimental: [ false ]
         include:
           - deno-version: canary
@@ -39,7 +39,7 @@ jobs:
           path: depcache
           key: ${{ runner.os }}-${{ hashFiles('lock.json') }} 
 
-      - run: deno test -A --coverage=cov --unstable
+      - run: deno test --allow-run=git --allow-read --allow-write --coverage=cov --unstable
 
       - if: matrix.os == 'ubuntu-20.04'
         run: deno coverage --lcov cov > cov.lcov
