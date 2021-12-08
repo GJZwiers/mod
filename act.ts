@@ -9,35 +9,9 @@ import {
 import { asciiDeno } from "./ascii.ts";
 import { log } from "./dev_deps.ts";
 
-async function addModuleFile(
-  filename: string,
-  content: Uint8Array,
-  options?: WriteFileSecOptions,
-) {
-  await writeFileSec(filename, content, options);
-}
-
-async function initGit(path: string) {
-  try {
-    const cmd = Deno.run({
-      cmd: ["git", "init", path],
-    });
-
-    const status = await cmd.status();
-    cmd.close();
-
-    return (status.code === 0) ? true : false;
-  } catch (error) {
-    log.warning(
-      "Could not initialize Git repository. Error:" + error,
-    );
-    return false;
-  }
-}
-
 export async function act(settings: Settings) {
   const path = settings.name;
-  if (path !== ".") {
+  if (path !== "." && path !== "./") {
     await Deno.mkdir(path, { recursive: true });
   }
 
@@ -132,6 +106,32 @@ export async function act(settings: Settings) {
 
   if (settings.ascii) {
     drawDeno();
+  }
+}
+
+async function addModuleFile(
+  filename: string,
+  content: Uint8Array,
+  options?: WriteFileSecOptions,
+) {
+  await writeFileSec(filename, content, options);
+}
+
+async function initGit(path: string) {
+  try {
+    const cmd = Deno.run({
+      cmd: ["git", "init", path],
+    });
+
+    const status = await cmd.status();
+    cmd.close();
+
+    return status.code === 0;
+  } catch (error) {
+    log.warning(
+      "Could not initialize Git repository. Error:" + error,
+    );
+    return false;
   }
 }
 
