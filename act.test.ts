@@ -6,7 +6,7 @@ Deno.test("runCommand()", async (test) => {
   defaults.name = "test_directory";
 
   await test.step(
-    "return true when a command's exit code is 0",
+    "return true if git initialization succeeds",
     async () => {
       Deno.mkdirSync(defaults.name, { recursive: true });
       assertEquals(await initGit(defaults.name), true);
