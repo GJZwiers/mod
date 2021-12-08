@@ -6,7 +6,7 @@ export function validateOptions(options: any) {
       options.importMap || options.js)
   ) {
     throw new Error(
-      "Cannot use config-only flag in combination with other options other than --name.",
+      "Cannot use --config-only in combination with other options other than --name.",
     );
   }
 }
