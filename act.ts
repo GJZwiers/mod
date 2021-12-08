@@ -17,7 +17,7 @@ async function addModuleFile(
   await writeFileSec(filename, content, options);
 }
 
-export async function initGit(path: string) {
+async function initGit(path: string) {
   try {
     const cmd = Deno.run({
       cmd: ["git", "init", path],

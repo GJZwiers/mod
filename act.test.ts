@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertThrows, sinon } from "./dev_deps.ts";
-import { act, funcs, initGit } from "./act.ts";
+import { act, funcs } from "./act.ts";
 import { defaults } from "./settings.ts";
 
 Deno.test("runCommand()", async (test) => {
@@ -9,7 +9,7 @@ Deno.test("runCommand()", async (test) => {
     "return true if git initialization succeeds",
     async () => {
       Deno.mkdirSync(defaults.name, { recursive: true });
-      assertEquals(await initGit(defaults.name), true);
+      assertEquals(await funcs.initGit(defaults.name), true);
       Deno.removeSync(defaults.name, { recursive: true });
     },
   );
