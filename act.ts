@@ -19,13 +19,19 @@ async function addModuleFile(
 
 async function initGit(path: string) {
   try {
-    await runCommand(Deno.run({
+    const cmd = Deno.run({
       cmd: ["git", "init", path],
-    }));
+    });
+
+    const status = await cmd.status();
+    cmd.close();
+
+    return (status.code === 0) ? true : false;
   } catch (error) {
     log.warning(
       "Could not initialize Git repository. Error:" + error,
     );
+    return false;
   }
 }
 
@@ -129,19 +135,7 @@ export async function act(settings: Settings) {
   }
 }
 
-export async function runCommand(
-  cmd: Deno.Process<{
-    cmd: string[] | [URL, ...string[]];
-  }>,
-): Promise<boolean> {
-  const status = await cmd.status();
-
-  cmd.close();
-
-  return (status.code === 0) ? true : false;
-}
-
-export function drawDeno() {
+function drawDeno() {
   const lines = asciiDeno.split(/\n/);
   let i = 0;
   for (const line of lines) {

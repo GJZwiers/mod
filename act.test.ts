@@ -1,29 +1,16 @@
 import { assert, assertEquals, assertThrows, sinon } from "./dev_deps.ts";
-import { act, funcs, runCommand } from "./act.ts";
+import { act, funcs } from "./act.ts";
 import { defaults } from "./settings.ts";
 
 Deno.test("runCommand()", async (test) => {
-  await test.step(
-    "return true when a command's exit code is 0",
-    async () => {
-      const cmd = Deno.run({
-        cmd: ["git", "init"],
-        stdout: "null",
-      });
-
-      assertEquals(await runCommand(cmd), true);
-    },
-  );
+  defaults.name = "test_directory";
 
   await test.step(
-    "return false when a command's exit code is greater than 0",
+    "return true if git initialization succeeds",
     async () => {
-      const cmd = Deno.run({
-        cmd: ["git", "checkout", "foo"],
-        stderr: "null",
-      });
-
-      assertEquals(await runCommand(cmd), false);
+      Deno.mkdirSync(defaults.name, { recursive: true });
+      assertEquals(await funcs.initGit(defaults.name), true);
+      Deno.removeSync(defaults.name, { recursive: true });
     },
   );
 });
