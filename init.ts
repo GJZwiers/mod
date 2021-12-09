@@ -6,7 +6,7 @@ import { validateOptions } from "./validate_options.ts";
 
 await new Command()
   .name("mod")
-  .version("v2.2.9")
+  .version("v2.2.10")
   .description("Start a new Deno module with a single command")
   .option(
     "--js [js:boolean]",
