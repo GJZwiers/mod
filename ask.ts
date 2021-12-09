@@ -1,5 +1,3 @@
-import { hasNoFileExtension } from "./utils.ts";
-
 // deno-lint-ignore no-explicit-any
 export function ask(options: any) {
   const ts = prompt("Use TypeScript?", "y");
@@ -9,17 +7,28 @@ export function ask(options: any) {
   let entrypoint = prompt(
     `Set entrypoint:`,
     `mod.${extension}`,
-  ) ?? "mod";
+  );
 
   let depsEntrypoint = prompt(
     "Set dependency entrypoint:",
     `deps.${extension}`,
-  ) ?? "deps";
+  );
 
   let devDepsEntrypoint = prompt(
     "Set dev dependency entrypoint:",
     `dev_deps.${extension}`,
-  ) ?? "dev_deps";
+  );
+
+  if (!entrypoint || !depsEntrypoint || !devDepsEntrypoint) {
+    throw new Error("Invalid entrypoint entered");
+  }
+
+  entrypoint = entrypoint.replace(new RegExp(`\.${extension}`), "");
+  depsEntrypoint = depsEntrypoint.replace(new RegExp(`\.${extension}`), "");
+  devDepsEntrypoint = devDepsEntrypoint.replace(
+    new RegExp(`\.${extension}`),
+    "",
+  );
 
   let map = false;
   if (!options.importMap) {
@@ -37,20 +46,6 @@ export function ask(options: any) {
       "n",
     );
     config = (withConfig === "y" || withConfig === "Y") ? true : false;
-  }
-
-  if (hasNoFileExtension(entrypoint, extension)) {
-    entrypoint = `${entrypoint}.${extension}`;
-  }
-
-  if (hasNoFileExtension(depsEntrypoint, extension)) {
-    depsEntrypoint = `${depsEntrypoint}.${extension}`;
-  }
-
-  if (
-    hasNoFileExtension(devDepsEntrypoint, extension)
-  ) {
-    devDepsEntrypoint = `${devDepsEntrypoint}.${extension}`;
   }
 
   const opts = {
