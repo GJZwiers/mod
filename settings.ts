@@ -38,7 +38,7 @@ const encoder = new TextEncoder();
 
 export const defaultModuleContent = encoder.encode("export {};\n");
 
-export const defaults: Settings = {
+export const settings: Settings = {
   ascii: false,
   config: false,
   configContent: encoder.encode("{\n\t\n}"),
@@ -75,7 +75,7 @@ target/`,
 };
 
 export const defaultTestModuleContent = encoder.encode(
-  `import { assert } from "./${defaults.devDepsEntrypoint}.{{extension}}"; 
+  `import { assert } from "./${settings.devDepsEntrypoint}.{{extension}}"; 
 
 Deno.test({
   name: "name",

@@ -1,40 +1,40 @@
 import { assert, assertEquals, assertThrows, sinon } from "./dev_deps.ts";
 import { act, funcs } from "./act.ts";
-import { defaults } from "./settings.ts";
+import { settings } from "./settings.ts";
 
 Deno.test("runCommand()", async (test) => {
-  defaults.name = "test_directory";
+  settings.name = "test_directory";
 
   await test.step(
     "return true if git initialization succeeds",
     async () => {
-      Deno.mkdirSync(defaults.name, { recursive: true });
-      assertEquals(await funcs.initGit(defaults.name), true);
-      Deno.removeSync(defaults.name, { recursive: true });
+      Deno.mkdirSync(settings.name, { recursive: true });
+      assertEquals(await funcs.initGit(settings.name), true);
+      Deno.removeSync(settings.name, { recursive: true });
     },
   );
 });
 
 Deno.test("act()", async (context) => {
-  defaults.name = "test_directory_act";
+  settings.name = "test_directory_act";
 
   const fileSpy = sinon.spy(funcs, "addModuleFile");
 
   const gitSpy = sinon.spy(funcs, "initGit");
 
   const beforeEach = () => {
-    Deno.mkdirSync(defaults.name, { recursive: true });
+    Deno.mkdirSync(settings.name, { recursive: true });
   };
 
   const afterEach = () => {
-    Deno.removeSync(defaults.name, { recursive: true });
+    Deno.removeSync(settings.name, { recursive: true });
 
-    defaults.config = false;
-    defaults.configOnly = false;
-    defaults.git = false;
-    defaults.importMap = false;
-    defaults.tdd = false;
-    defaults.ci = false;
+    settings.config = false;
+    settings.configOnly = false;
+    settings.git = false;
+    settings.importMap = false;
+    settings.tdd = false;
+    settings.ci = false;
 
     fileSpy.resetHistory();
     gitSpy.resetHistory();
@@ -55,29 +55,29 @@ Deno.test("act()", async (context) => {
   await test({
     name: "initialize git if settings.git is true",
     fn: async () => {
-      defaults.git = true;
+      settings.git = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 1);
       assertEquals(fileSpy.getCalls().length, standardFiles.length);
 
-      assert(`${defaults.name}/.git`);
+      assert(`${settings.name}/.git`);
     },
   });
 
   await test({
     name: "create import_map.json if settings.importMap is true",
     fn: async () => {
-      defaults.importMap = true;
+      settings.importMap = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
       const mapFile = Deno.readFileSync(
-        `${defaults.name}/import_map.json`,
+        `${settings.name}/import_map.json`,
       );
 
       assert(mapFile);
@@ -87,15 +87,15 @@ Deno.test("act()", async (context) => {
   await test({
     name: "create deno.json if settings.config is true",
     fn: async () => {
-      defaults.config = true;
+      settings.config = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
       const configFile = Deno.readFileSync(
-        `${defaults.name}/deno.json`,
+        `${settings.name}/deno.json`,
       );
 
       assert(configFile);
@@ -105,15 +105,15 @@ Deno.test("act()", async (context) => {
   await test({
     name: "create .test file for module entrypoint if settings.tdd is true",
     fn: async () => {
-      defaults.tdd = true;
+      settings.tdd = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
       const testFile = Deno.readFileSync(
-        `${defaults.name}/mod.test.ts`,
+        `${settings.name}/mod.test.ts`,
       );
 
       assert(testFile);
@@ -123,21 +123,21 @@ Deno.test("act()", async (context) => {
   await test({
     name: "create .js files when settings.js is true",
     fn: async () => {
-      defaults.js = true;
+      settings.js = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length);
 
       assert(
-        Deno.readFileSync(`${defaults.name}/mod.js`),
+        Deno.readFileSync(`${settings.name}/mod.js`),
       );
       assert(
-        Deno.readFileSync(`${defaults.name}/deps.js`),
+        Deno.readFileSync(`${settings.name}/deps.js`),
       );
       assert(
-        Deno.readFileSync(`${defaults.name}/dev_deps.js`),
+        Deno.readFileSync(`${settings.name}/dev_deps.js`),
       );
     },
   });
@@ -146,27 +146,27 @@ Deno.test("act()", async (context) => {
     name:
       "only create configuration file(s) and no module entrypoints if settings.configOnly is true",
     fn: async () => {
-      defaults.configOnly = true;
+      settings.configOnly = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, 1);
 
       const configFile = Deno.readFileSync(
-        `${defaults.name}/deno.json`,
+        `${settings.name}/deno.json`,
       );
 
       assert(configFile);
 
       assertThrows(() => {
-        Deno.readFileSync(`${defaults.name}/mod.ts`);
+        Deno.readFileSync(`${settings.name}/mod.ts`);
       });
       assertThrows(() => {
-        Deno.readFileSync(`${defaults.name}/deps.ts`);
+        Deno.readFileSync(`${settings.name}/deps.ts`);
       });
       assertThrows(() => {
-        Deno.readFileSync(`${defaults.name}/dev_deps.ts`);
+        Deno.readFileSync(`${settings.name}/dev_deps.ts`);
       });
     },
   });
@@ -174,15 +174,15 @@ Deno.test("act()", async (context) => {
   await test({
     name: "create workflow file if settings.ci is true",
     fn: async () => {
-      defaults.ci = true;
+      settings.ci = true;
 
-      await act(defaults);
+      await act(settings);
 
       assertEquals(gitSpy.getCalls().length, 0);
       assertEquals(fileSpy.getCalls().length, standardFiles.length + 1);
 
       const workflowFile = Deno.readFileSync(
-        `${defaults.name}/.github/workflows/build.yaml`,
+        `${settings.name}/.github/workflows/build.yaml`,
       );
 
       assert(workflowFile);

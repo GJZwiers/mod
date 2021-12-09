@@ -1,6 +1,6 @@
 import { Command } from "./deps.ts";
 import { act } from "./act.ts";
-import { defaults } from "./settings.ts";
+import { settings } from "./settings.ts";
 import { ask } from "./ask.ts";
 import { validateOptions } from "./validate_options.ts";
 
@@ -81,9 +81,9 @@ await new Command()
 
     if (options.prompt) {
       const choices = ask(options);
-      act({ ...defaults, ...choices });
+      act({ ...settings, ...choices });
     } else {
-      act({ ...defaults, ...options });
+      act({ ...settings, ...options });
     }
   })
   .help({
