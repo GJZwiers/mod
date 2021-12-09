@@ -23,10 +23,12 @@ export function ask(options: any) {
     throw new Error("Invalid entrypoint entered");
   }
 
-  entrypoint = entrypoint.replace(new RegExp(`\.${extension}`), "");
-  depsEntrypoint = depsEntrypoint.replace(new RegExp(`\.${extension}`), "");
+  const validator = new RegExp(`\.${extension}$`);
+
+  entrypoint = entrypoint.replace(validator, "");
+  depsEntrypoint = depsEntrypoint.replace(validator, "");
   devDepsEntrypoint = devDepsEntrypoint.replace(
-    new RegExp(`\.${extension}`),
+    validator,
     "",
   );
 
