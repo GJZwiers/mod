@@ -1,19 +1,19 @@
 import { assertThrows } from "./dev_deps.ts";
 import { validateOptions } from "./validate_options.ts";
-import { defaults } from "./settings.ts";
+import { settings } from "./settings.ts";
 
 Deno.test("validateOptions()", async (context) => {
   const beforeEach = () => {
-    defaults.configOnly = true;
+    settings.configOnly = true;
   };
 
   const afterEach = () => {
-    defaults.config = false;
-    defaults.configOnly = false;
-    defaults.git = false;
-    defaults.importMap = false;
-    defaults.tdd = false;
-    defaults.ci = false;
+    settings.config = false;
+    settings.configOnly = false;
+    settings.git = false;
+    settings.importMap = false;
+    settings.tdd = false;
+    settings.ci = false;
   };
 
   const test = async (
@@ -29,10 +29,10 @@ Deno.test("validateOptions()", async (context) => {
   await test({
     name: "throw if 'config-only' is used with 'ci'",
     fn: () => {
-      defaults.ci = true;
+      settings.ci = true;
 
       assertThrows(() => {
-        validateOptions(defaults);
+        validateOptions(settings);
       });
     },
   });
@@ -40,10 +40,10 @@ Deno.test("validateOptions()", async (context) => {
   await test({
     name: "throw if 'config-only' is used with 'config'",
     fn: () => {
-      defaults.config = true;
+      settings.config = true;
 
       assertThrows(() => {
-        validateOptions(defaults);
+        validateOptions(settings);
       });
     },
   });
@@ -51,10 +51,10 @@ Deno.test("validateOptions()", async (context) => {
   await test({
     name: "throw if 'config-only' is used with 'import-map'",
     fn: () => {
-      defaults.importMap = true;
+      settings.importMap = true;
 
       assertThrows(() => {
-        validateOptions(defaults);
+        validateOptions(settings);
       });
     },
   });
@@ -62,10 +62,10 @@ Deno.test("validateOptions()", async (context) => {
   await test({
     name: "throw if 'config-only' is used with 'js'",
     fn: () => {
-      defaults.js = true;
+      settings.js = true;
 
       assertThrows(() => {
-        validateOptions(defaults);
+        validateOptions(settings);
       });
     },
   });
@@ -73,10 +73,10 @@ Deno.test("validateOptions()", async (context) => {
   await test({
     name: "throw if 'config-only' is used with 'prompt'",
     fn: () => {
-      defaults.prompt = true;
+      settings.prompt = true;
 
       assertThrows(() => {
-        validateOptions(defaults);
+        validateOptions(settings);
       });
     },
   });
@@ -84,11 +84,11 @@ Deno.test("validateOptions()", async (context) => {
   await test({
     name: "throw if 'config-only' is used with 'tdd'",
     fn: () => {
-      defaults.tdd = true;
-      defaults.configOnly = true;
+      settings.tdd = true;
+      settings.configOnly = true;
 
       assertThrows(() => {
-        validateOptions(defaults);
+        validateOptions(settings);
       });
     },
   });

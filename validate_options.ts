@@ -1,5 +1,6 @@
-// deno-lint-ignore no-explicit-any
-export function validateOptions(options: any) {
+import { Settings } from "./settings.ts";
+
+export function validateOptions(options: Settings) {
   if (
     options.configOnly &&
     (options.tdd || options.prompt || options.ci || options.config ||
