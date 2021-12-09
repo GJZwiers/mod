@@ -7,10 +7,12 @@ export function ask(settings: Settings): Settings {
   // Apply modifications to a clone of the settings object for isolation purposes.
   const userSettings: Settings = self.structuredClone(settings);
 
-  // TODO: dont prompt if --js flag is passed.
-  const ts = prompt("Use TypeScript?", "y");
-
-  userSettings.extension = (ts === "y" || ts === "Y") ? "ts" : "js";
+  if (!settings.js) {
+    const ts = prompt("Use TypeScript?", "y");
+    userSettings.extension = (ts === "y" || ts === "Y") ? "ts" : "js";
+  } else {
+    userSettings.extension = "js";
+  }
 
   const entrypoint = prompt(
     `Set entrypoint:`,
