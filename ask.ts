@@ -45,9 +45,7 @@ export function ask(settings: Settings): Settings {
       "Add import map?",
       "n",
     );
-    userSettings.importMap = (importMap === "y" || importMap === "Y")
-      ? true
-      : false;
+    userSettings.importMap = importMap === "y" || importMap === "Y";
   }
 
   if (!userSettings.config) {
@@ -55,9 +53,7 @@ export function ask(settings: Settings): Settings {
       "Add Deno configuration file?",
       "n",
     );
-    userSettings.config = (withConfig === "y" || withConfig === "Y")
-      ? true
-      : false;
+    userSettings.config = withConfig === "y" || withConfig === "Y";
   }
 
   return userSettings;
