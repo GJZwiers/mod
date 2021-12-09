@@ -1,7 +1,6 @@
 import { assertThrows } from "./dev_deps.ts";
 import { validateOptions } from "./validate_options.ts";
 import { defaults } from "./settings.ts";
-import { TestOptions } from "./act.test.ts";
 
 Deno.test("validateOptions()", async (context) => {
   const beforeEach = () => {
@@ -18,14 +17,11 @@ Deno.test("validateOptions()", async (context) => {
   };
 
   const test = async (
-    options: TestOptions,
+    options: Deno.TestDefinition,
   ) => {
     beforeEach();
 
-    await context.step(
-      options.name,
-      options.fn,
-    );
+    await context.step(options);
 
     afterEach();
   };
@@ -40,6 +36,7 @@ Deno.test("validateOptions()", async (context) => {
       });
     },
   });
+
   await test({
     name: "throw if 'config-only' is used with 'config'",
     fn: () => {
@@ -50,6 +47,7 @@ Deno.test("validateOptions()", async (context) => {
       });
     },
   });
+
   await test({
     name: "throw if 'config-only' is used with 'import-map'",
     fn: () => {
@@ -60,6 +58,7 @@ Deno.test("validateOptions()", async (context) => {
       });
     },
   });
+
   await test({
     name: "throw if 'config-only' is used with 'js'",
     fn: () => {
