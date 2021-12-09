@@ -15,11 +15,6 @@ Deno.test("runCommand()", async (test) => {
   );
 });
 
-export interface TestOptions {
-  name: string;
-  fn: (t: Deno.TestContext) => void | Promise<void>;
-}
-
 Deno.test("act()", async (context) => {
   defaults.name = "test_directory_act";
 
@@ -46,14 +41,11 @@ Deno.test("act()", async (context) => {
   };
 
   const test = async (
-    options: TestOptions,
+    options: Deno.TestDefinition,
   ) => {
     beforeEach();
 
-    await context.step(
-      options.name,
-      options.fn,
-    );
+    await context.step(options);
 
     afterEach();
   };
