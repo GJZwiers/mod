@@ -65,7 +65,7 @@ deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.lan
 ```
 
 If you want to install a particular version use, for example,
-`https://deno.land/x/mod@v2.2.8/mod.ts`.
+`https://deno.land/x/mod@v2.2.9/mod.ts`.
 
 You can also get the _unstable_ canary release from GitHub by installing via the
 `main` branch's raw URL:
