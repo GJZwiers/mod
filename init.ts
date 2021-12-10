@@ -17,7 +17,7 @@ await new Command()
   )
   .option(
     "-n, --name [name:string]",
-    "Create the module in a new directory with the entered name.",
+    "Create the module in a new or existing directory at the absolute or relative path provided.",
   )
   .option(
     "-p, --prompt [prompt:boolean]",
@@ -76,14 +76,22 @@ await new Command()
       default: false,
     },
   )
-  .action((options) => {
+  .action(async (options) => {
     validateOptions(options);
 
     if (options.prompt) {
       const choices = ask(options);
-      act({ ...settings, ...choices });
+      await act({ ...settings, ...choices });
     } else {
-      act({ ...settings, ...options });
+      await act({ ...settings, ...options });
+    }
+
+    if (options.name === "." || options.name === "./") {
+      console.log(`Created new Deno module in current working directory.`);
+    } else {
+      console.log(
+        `Created new Deno module in ${await Deno.realPath(options.name)}.`,
+      );
     }
   })
   .help({
@@ -103,7 +111,7 @@ await new Command()
     "mod --ci",
   )
   .example(
-    "Add an import map and deno configuration file",
+    "Add an import map and Deno configuration file",
     "mod --import-map --config",
   )
   .parse(Deno.args);

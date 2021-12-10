@@ -129,7 +129,7 @@ async function initGit(path: string) {
     return status.code === 0;
   } catch (error) {
     log.warning(
-      "Could not initialize Git repository. Error:" + error,
+      "Could not initialize Git repository. Error: " + error,
     );
     return false;
   }
