@@ -3,7 +3,7 @@
   "entry": "./mod.ts",
   "description": "Start a new Deno module",
   "unstable": true,
-  "version": "v2.2.10",
+  "version": "v2.2.11",
   "files": [
     "./**/*.ts",
     "./README.md",
