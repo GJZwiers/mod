@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: depcache
-          key: ${{ runner.os }}-${{ hashFiles('lock.json') }} 
+          key: ${{ hashFiles('lock.json') }} 
 
       - run: deno test --allow-run=git --allow-read --allow-write --lock=lock.json --coverage=cov --unstable
 
