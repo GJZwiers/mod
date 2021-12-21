@@ -5,16 +5,16 @@ on: push
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
+    continue-on-error: ${{ matrix.canary }}
     strategy:
       matrix:
         os: [ ubuntu-20.04, macos-11, windows-2019 ]
         deno-version: [ v1.x ]
-        experimental: [ false ]
+        canary: [ false ]
         include:
           - deno-version: canary
             os: ubuntu-18.04
-            experimental: true
+            canary: true
     env:
       DENO_DIR: depcache
 
@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: depcache
-          key: ${{ runner.os }}-${{ hashFiles('lock.json') }} 
+          key: ${{ hashFiles('lock.json') }}
 
       - run: deno test --allow-run=git --allow-read --allow-write --lock=lock.json --coverage=cov --unstable
 
@@ -49,3 +49,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: cov.lcov
+
