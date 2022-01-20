@@ -40,7 +40,7 @@ jobs:
           key: ${{ hashFiles('lock.json') }}
 
       - run: |
-          deno test
+          deno test \
           --allow-run=git \
           --allow-read \
           --allow-write \
