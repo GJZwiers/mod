@@ -2,6 +2,6 @@ export {
   assert,
   assertEquals,
   assertThrows,
-} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+} from "https://deno.land/std@0.122.0/testing/asserts.ts";
 export { default as sinon } from "https://cdn.skypack.dev/sinon@12.0.1?dts";
-export * as log from "https://deno.land/std@0.121.0/log/mod.ts";
+export * as log from "https://deno.land/std@0.122.0/log/mod.ts";
