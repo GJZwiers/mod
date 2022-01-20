@@ -61,7 +61,7 @@ https://deno.land/x/mod/mod.ts `
 release from `deno.land/x`:
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod@v2.2.15/mod.ts
+deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod@v2.2.16/mod.ts
 ```
 
 You can also get the _unstable_ canary release from GitHub by installing via the
