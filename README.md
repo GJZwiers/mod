@@ -21,7 +21,7 @@ Try it without any installation:
 
 ```bash
 deno run \
---allow-read=my_deno_module \
+--allow-read \
 --allow-run=git \
 --allow-write=my_deno_module \
 https://deno.land/x/mod/mod.ts \
@@ -37,7 +37,7 @@ https://deno.land/x/mod/mod.ts \
 
 ```console
 deno run `
---allow-read=my_deno_module `
+--allow-read `
 --allow-run=git `
 --allow-write=my_deno_module `
 https://deno.land/x/mod/mod.ts `
@@ -61,7 +61,7 @@ https://deno.land/x/mod/mod.ts `
 release from `deno.land/x`:
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod@v2.3.0/mod.ts
+deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod@v2.3.1/mod.ts
 ```
 
 You can also get the _unstable_ canary release from GitHub by installing via the
