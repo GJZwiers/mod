@@ -21,7 +21,7 @@ Try it without any installation:
 
 ```bash
 deno run \
---allow-read=my_deno_module \
+--allow-read \
 --allow-run=git \
 --allow-write=my_deno_module \
 https://deno.land/x/mod/mod.ts \
@@ -37,7 +37,7 @@ https://deno.land/x/mod/mod.ts \
 
 ```console
 deno run `
---allow-read=my_deno_module `
+--allow-read `
 --allow-run=git `
 --allow-write=my_deno_module `
 https://deno.land/x/mod/mod.ts `
