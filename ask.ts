@@ -7,8 +7,8 @@ export function ask(settings: Settings): Settings {
   // Apply modifications to a clone of the settings object for isolation purposes.
   const userSettings: Settings = self.structuredClone(settings);
 
-  if (!settings.js) {
-    const ts = prompt("Use TypeScript?", "y");
+  if (!userSettings.js) {
+    const ts = prompt("Would you like to use TypeScript?", "y");
     userSettings.extension = (ts === "y" || ts === "Y") ? "ts" : "js";
   } else {
     userSettings.extension = "js";
@@ -44,7 +44,7 @@ export function ask(settings: Settings): Settings {
 
   if (!userSettings.importMap) {
     const importMap = prompt(
-      "Add import map?",
+      "Would you like to use an import map?",
       "n",
     );
     userSettings.importMap = importMap === "y" || importMap === "Y";
@@ -52,7 +52,7 @@ export function ask(settings: Settings): Settings {
 
   if (!userSettings.config) {
     const withConfig = prompt(
-      "Add Deno configuration file?",
+      "Would you like to use a Deno configuration file?",
       "n",
     );
     userSettings.config = withConfig === "y" || withConfig === "Y";

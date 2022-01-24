@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "./dev_deps.ts";
-import { hasNoFileExtension, writeFileSec } from "./utils.ts";
+import { writeFileSec } from "./utils.ts";
 
 Deno.test("writeFileOrWarn()", async (t) => {
   const testFilePath = "./foo.ts";
@@ -66,12 +66,4 @@ Deno.test("mkdirOrWarn()", async (t) => {
       await afterEach();
     },
   );
-});
-
-Deno.test("hasFileExtension()", async (t) => {
-  await t.step("should validate a filename correctly", () => {
-    assertEquals(hasNoFileExtension("mod.ts", "ts"), false);
-    assertEquals(hasNoFileExtension("mod.ts", "js"), true);
-    assertEquals(hasNoFileExtension("mod", "ts"), true);
-  });
 });
