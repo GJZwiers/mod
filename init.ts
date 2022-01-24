@@ -3,10 +3,14 @@ import { act } from "./act.ts";
 import { settings } from "./settings.ts";
 import { ask } from "./ask.ts";
 import { validateOptions } from "./validate_options.ts";
+import { asciiDeno } from "./ascii.ts";
 
+/**
+ * The main CLI command with flags and options.
+ */
 await new Command()
   .name("mod")
-  .version("v2.2.16")
+  .version("v2.2.17")
   .description("Start a new Deno module with a single command")
   .option(
     "--js [js:boolean]",
@@ -86,6 +90,10 @@ await new Command()
       await act({ ...settings, ...options });
     }
 
+    if (options.ascii) {
+      drawDeno();
+    }
+
     if (options.name === "." || options.name === "./") {
       console.log(`Created new Deno module in current working directory.`);
     } else {
@@ -115,3 +123,17 @@ await new Command()
     "mod --import-map --config",
   )
   .parse(Deno.args);
+
+/**
+ * Responsible for drawing an ASCII-style Deno to the terminal if the user passes the --ascii option.
+ */
+function drawDeno() {
+  const lines = asciiDeno.split(/\n/);
+  let i = 0;
+  for (const line of lines) {
+    i += 50;
+    setTimeout(() => {
+      console.log(line);
+    }, 250 + i);
+  }
+}

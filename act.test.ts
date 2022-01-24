@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertThrows, sinon } from "./dev_deps.ts";
-import { act, funcs } from "./act.ts";
+import { act, fns } from "./act.ts";
 import { settings } from "./settings.ts";
 
 Deno.test("runCommand()", async (test) => {
@@ -9,7 +9,7 @@ Deno.test("runCommand()", async (test) => {
     "return true if git initialization succeeds",
     async () => {
       Deno.mkdirSync(settings.name, { recursive: true });
-      assertEquals(await funcs.initGit(settings.name), true);
+      assertEquals(await fns.initGit(settings.name), true);
       Deno.removeSync(settings.name, { recursive: true });
     },
   );
@@ -18,9 +18,9 @@ Deno.test("runCommand()", async (test) => {
 Deno.test("act()", async (context) => {
   settings.name = "test_directory_act";
 
-  const fileSpy = sinon.spy(funcs, "addModuleFile");
+  const fileSpy = sinon.spy(fns, "writeFileSec");
 
-  const gitSpy = sinon.spy(funcs, "initGit");
+  const gitSpy = sinon.spy(fns, "initGit");
 
   const beforeEach = () => {
     Deno.mkdirSync(settings.name, { recursive: true });
@@ -35,6 +35,7 @@ Deno.test("act()", async (context) => {
     settings.importMap = false;
     settings.tdd = false;
     settings.ci = false;
+    settings.js = false;
 
     fileSpy.resetHistory();
     gitSpy.resetHistory();

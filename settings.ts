@@ -75,7 +75,7 @@ target/`,
 };
 
 export const defaultTestModuleContent = encoder.encode(
-  `import { assert } from "./${settings.devDepsEntrypoint}.{{extension}}"; 
+  `import { assert } from "./{{devDepsEntrypoint}}.{{extension}}"; 
 
 Deno.test({
   name: "name",
