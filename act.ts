@@ -38,7 +38,6 @@ async function initGit(path: string) {
  * This function is responsible for creating the module's contents using user-provided settings or defaults.
  */
 export async function act(settings: Settings) {
-  console.log(settings);
   const path = settings.name;
 
   if (path !== "." && path !== "./") {
