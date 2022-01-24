@@ -10,7 +10,7 @@ import { asciiDeno } from "./ascii.ts";
  */
 await new Command()
   .name("mod")
-  .version("v2.2.16")
+  .version("v2.2.17")
   .description("Start a new Deno module with a single command")
   .option(
     "--js [js:boolean]",
