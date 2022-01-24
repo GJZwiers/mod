@@ -107,6 +107,10 @@ export async function act(settings: Settings) {
           /\{\{extension\}\}/,
           settings.extension,
         )
+        .replace(
+          /\{\{devDepsEntrypoint\}\}/,
+          settings.devDepsEntrypoint,
+        ),
     );
 
     await fns.writeFileSec(
