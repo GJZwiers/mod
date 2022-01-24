@@ -41,7 +41,28 @@ export const defaultModuleContent = encoder.encode("export {};\n");
 export const settings: Settings = {
   ascii: false,
   config: false,
-  configContent: encoder.encode("{\n\t\n}"),
+  configContent: encoder.encode(
+    `{
+  "compilerOptions": {},
+  "fmt": {
+    "files": {
+      "include": [],
+      "exclude": []
+    },
+    "options": {}
+  },
+  "lint": {
+    "files": {
+      "include": [],
+      "exclude": []
+    },
+    "rules": {
+      "include": [],
+      "exclude": []
+    }
+  }
+}`,
+  ),
   configOnly: false,
   extension: "ts",
   entrypoint: "mod",
