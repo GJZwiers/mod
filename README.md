@@ -4,9 +4,10 @@
 <img src=".github/excited_deno.png" width="350">
 </p>
 
+[![deno module](https://shield.deno.dev/x/mod)](https://deno.land/x/mod)
+![deno compatibility](https://shield.deno.dev/deno/^1.15)
 [![Build](https://github.com/GJZwiers/mod/actions/workflows/build.yaml/badge.svg)](https://github.com/GJZwiers/mod/actions/workflows/build.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/GJZwiers/mod/badge.svg?branch=main)](https://coveralls.io/github/GJZwiers/mod?branch=main)
-[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/mod)
 ![GitHub](https://img.shields.io/github/license/GJZwiers/mod)
 
 `mod` is a command line tool to quickly scaffold a new Deno module. It creates
