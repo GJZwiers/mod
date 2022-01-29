@@ -107,7 +107,7 @@ Deno.test({
 );
 
 export const defaultTestImportContent = encoder.encode(
-  'export { assert } from "https://deno.land/std@0.122.0/testing/asserts.ts";\n',
+  'export { assert } from "https://deno.land/std@0.123.0/testing/asserts.ts";\n',
 );
 
 export const actions = encoder.encode(YAML.stringify({
