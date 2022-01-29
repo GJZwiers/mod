@@ -9,9 +9,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: denoland/setup-deno@v1.1.0
         with:
-          deno-version: v1.16.x
+          deno-version: v1.5.x
       - name: Release
         run: |
-          deno install -Af --unstable https://x.nest.land/eggs@0.3.10/eggs.ts
+          deno install -Af --unstable https://x.nest.land/eggs@0.3.8/eggs.ts
           eggs link ${{ secrets.NESTAPIKEY }}
           eggs publish -dD --yes --no-check --version $(git describe --tags $(git rev-list --tags --max-count=1))
