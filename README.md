@@ -1,9 +1,5 @@
 # mod
 
-<p align="center">
-<img src=".github/excited_deno.png" width="350">
-</p>
-
 [![deno module](https://shield.deno.dev/x/mod)](https://deno.land/x/mod)
 ![deno compatibility](https://shield.deno.dev/deno/^1.15)
 [![Build](https://github.com/GJZwiers/mod/actions/workflows/build.yaml/badge.svg)](https://github.com/GJZwiers/mod/actions/workflows/build.yaml)
