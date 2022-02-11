@@ -1,4 +1,4 @@
-import { Settings } from "./settings.ts";
+import type { Settings } from "./settings.ts";
 
 export function validateOptions(options: Settings) {
   if (!options.name) options.name = ".";

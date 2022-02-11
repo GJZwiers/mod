@@ -1,4 +1,4 @@
-import { Settings } from "./settings.ts";
+import type { Settings } from "./settings.ts";
 
 /**
  * Enable the user to override default settings with a couple of prompts.
