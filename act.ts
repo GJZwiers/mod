@@ -5,7 +5,7 @@ import {
   defaultModuleContent,
   defaultTestImportContent,
   defaultTestModuleContent,
-  Settings,
+  type Settings,
 } from "./settings.ts";
 
 export const fns = {
