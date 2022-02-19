@@ -42,7 +42,7 @@ jobs:
       - run: deno test --allow-run=git --allow-read --allow-write --lock=lock.json --coverage=cov/
 
       - if: matrix.os == 'ubuntu-20.04'
-        run: deno coverage --lcov --ouput=cov.lcov cov/
+        run: deno coverage --lcov --output=cov.lcov cov/
 
       - if: matrix.os == 'ubuntu-20.04'
         uses: coverallsapp/github-action@master
