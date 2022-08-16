@@ -107,7 +107,7 @@ Deno.test({
 );
 
 export const defaultTestImportContent = encoder.encode(
-  'export { assert } from "https://deno.land/std@0.134.0/testing/asserts.ts";\n',
+  'export { assert } from "https://deno.land/std@0.152.0/testing/asserts.ts";\n',
 );
 
 export const actions = encoder.encode(YAML.stringify({
@@ -118,7 +118,7 @@ export const actions = encoder.encode(YAML.stringify({
       "runs-on": "${{ matrix.os }}",
       strategy: {
         matrix: {
-          os: ["ubuntu-20.04"],
+          os: ["ubuntu-22.04"],
         },
       },
       steps: [
