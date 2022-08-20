@@ -6,6 +6,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/GJZwiers/mod/badge.svg?branch=main)](https://coveralls.io/github/GJZwiers/mod?branch=main)
 ![GitHub](https://img.shields.io/github/license/GJZwiers/mod)
 
+> **Warning**
+> This Deno module is deprecated. I recommend using `deno init` instead.
+
 `mod` is a command line tool to quickly scaffold a new Deno module. It creates
 app and dependency entrypoints, a `.gitignore` file and has options to add a
 test-driven setup and/or include a basic CI pipeline.
@@ -58,7 +61,7 @@ https://deno.land/x/mod/mod.ts `
 release from `deno.land/x`:
 
 ```console
-deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod@v2.3.8/mod.ts
+deno install --allow-read --allow-run=git --allow-write -fn mod https://deno.land/x/mod@v2.3.9/mod.ts
 ```
 
 You can also get the _unstable_ canary release from GitHub by installing via the

@@ -3,7 +3,7 @@
   "entry": "./mod.ts",
   "description": "Simple Command Line Interface to create Deno module entrypoints, CI, config and more.",
   "unstable": true,
-  "version": "v2.3.8",
+  "version": "v2.3.9",
   "files": [
     "./**/*.ts",
     "./README.md",
