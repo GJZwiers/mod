@@ -6,8 +6,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/GJZwiers/mod/badge.svg?branch=main)](https://coveralls.io/github/GJZwiers/mod?branch=main)
 ![GitHub](https://img.shields.io/github/license/GJZwiers/mod)
 
-> **Warning**
-> This Deno module is deprecated. I recommend using `deno init` instead.
+> **Warning** This Deno module is deprecated. I recommend using `deno init`
+> instead.
 
 `mod` is a command line tool to quickly scaffold a new Deno module. It creates
 app and dependency entrypoints, a `.gitignore` file and has options to add a
